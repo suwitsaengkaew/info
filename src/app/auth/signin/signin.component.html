@@ -1,4 +1,4 @@
-<div class="row">
+<!-- <div class="row">
   <div class="col-xs-12 col-sm-10 col-md-6 col-sm-offset-1 com-md-offset-2">
     <form (ngSubmit)="onSignin(f)" #f="ngForm">
       <div class="form-group">
@@ -17,4 +17,23 @@
       <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Sign In</button>
     </form>
   </div>
+</div> -->
+
+
+<div class="container form-body">
+  <div class="panel group">
+    <div class="panel panel-info">
+      <div class="panel-heading">Please sign in</div>
+      <div class="panel-body">
+        <form class="form-signin" [formGroup]="signinForm" (ngSubmit)="onSignin()">
+          <label for="inputEmail" class="sr-only">Email Address</label>
+          <input type="email" class="form-control" id="inputEmail" placeholder="Email Address" formControlName="inputEmail">
+          <label for="inputPassword" class="sr-only">Password</label>
+          <input type="password" class="form-control" id="inputPassword" placeholder="Password" formControlName="inputPassword">
+          <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!signinForm.valid">Sign in</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
 </div>
