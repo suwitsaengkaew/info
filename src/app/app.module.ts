@@ -1,26 +1,32 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule } from './app.router';
+
+import { AuthService } from './auth/auth.service';
 
 import { AppComponent } from './app.component';
 import { SigninComponent } from './auth/signin/signin.component';
-import { AuthenticationService } from './auth/auth.service';
-import { HomeComponent } from './home/home.component';
+import { HeaderComponent } from './header/header.component';
+import { MainpageinfoComponent } from './mainpageinfo/mainpageinfo.component';
+import { PrRecordComponent } from './pr-record/pr-record.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     SigninComponent,
-    HomeComponent
+    HeaderComponent,
+    MainpageinfoComponent,
+    PrRecordComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    AppRoutingModule
   ],
-  providers: [AuthenticationService],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

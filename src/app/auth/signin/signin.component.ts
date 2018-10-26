@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormGroup, Validator, FormControl, Validators } from '@angular/forms';
 
-import { AuthenticatesModel } from '../../master/model/model';
-import { AuthenticationService } from '../auth.service';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signin',
@@ -11,29 +10,33 @@ import { AuthenticationService } from '../auth.service';
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent implements OnInit {
+  signinForm: FormGroup;
 
   constructor(
-    private authService: AuthenticationService,
+    private authService: AuthService,
     private router: Router
     ) { }
 
   ngOnInit() {
+    this.forminit();
   }
 
-  onSignin(form: NgForm) {
-    const authenticationUser = this.authService.getAuthentication();
-    const email = form.value.email;
-    const password = form.value.password;
-    // this.authService.signinUser(email, password);
-    for (const user of authenticationUser) {
-      if ((email === user.user) && (password === user.password)) {
-        this.router.navigate(['home']);
-      }
-    }
+  onSignin() {
+    const userid = this.signinForm.value['inputEmail'];
+    const userpass = this.signinForm.value['inputPassword'];
+    this.authService.signinUser(userid, userpass);
+    // if (this.authService) {
+    //   this.router.navigate(['/mainpage']);
+    // }
   }
 
-  onGetAuthenUser() {
-    console.log(this.authService.getAuthentication());
+  private forminit() {
+    const userid = '';
+    const userpass = '';
+    this.signinForm = new FormGroup({
+      'inputEmail': new FormControl(userid, Validators.required),
+      'inputPassword': new FormControl(userpass, Validators.required)
+    });
   }
 
 }

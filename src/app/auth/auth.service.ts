@@ -1,26 +1,44 @@
-// import * as firebase from 'firebase';
-
-// export class AuthService {
-//     signinUser(email: string, password: string) {
-//         firebase.auth().signInWithEmailAndPassword(email, password)
-//         .then(
-//             response => console.log(response)
-//         )
-//         .catch(
-//             error => console.log(error)
-//         );
-//     }
-// }
-
-import { Authenticates } from '../master/data/data.model';
+import * as firebase from 'firebase';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable()
-export class AuthenticationService {
-    constructor() {}
+export class AuthService {
+    token: String;
 
-    getAuthentication() {
-        const authenUser = Authenticates;
-        return authenUser;
+    constructor(
+        private router: Router
+    ) {}
+    signinUser(email: string, password: string) {
+        firebase.auth().signInWithEmailAndPassword(email, password)
+        .then(
+            response => {
+                this.router.navigate(['/mainpage']);
+                firebase.auth().currentUser.getIdToken()
+                .then(
+                    (token: string) => this.token = token
+                );
+            }
+        )
+        .catch(
+            error => console.log(error)
+        );
     }
+
+    logoutUser() {
+        firebase.auth().signOut();
+        this.token = null;
+    }
+
+    getToken() {
+        firebase.auth().currentUser.getIdToken()
+                .then(
+                    (token: string) => this.token = token
+                );
+    }
+
+    isAuthenticated() {
+        return this.token != null;
+    }
+
 }

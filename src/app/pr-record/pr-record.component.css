@@ -1,0 +1,83 @@
+.container-1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.container-2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.container-detail {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.container-1 div,
+.container-2 div,
+.container-detail div {
+  margin: 5px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.button-container #butplus,
+.button-container label {
+  margin: 5px;
+}
+
+#panel-body {
+    height: calc(100vh - 130px);
+}
+
+.item-container {
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+
+.event-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#savebutton,
+#clearbutton {
+  margin: 5px;
+  width: 200px;
+}
+
+
+@media screen and (max-width: 1280px) {
+  .container-1 {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .container-2 {
+    display: flex;
+    flex-direction: column;
+  }
+
+
+  .container-detail {
+    display: flex;
+    flex-wrap: wrap;
+    /*
+        flex-direction: column;
+        */
+  }
+}
+
+@media screen and (max-width: 480px) {
+
+  .container-detail {
+    display: flex;
+    flex-direction: column;
+  }
+}
