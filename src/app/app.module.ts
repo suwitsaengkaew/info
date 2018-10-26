@@ -10,6 +10,13 @@ import { SigninComponent } from './auth/signin/signin.component';
 import { HeaderComponent } from './header/header.component';
 import { MainpageinfoComponent } from './mainpageinfo/mainpageinfo.component';
 import { PrRecordComponent } from './pr-record/pr-record.component';
+import { AdministratorComponent } from './administrator/administrator.component';
+import { SuppliersComponent } from './administrator/suppliers/suppliers.component';
+import { UnitComponent } from './administrator/unit/unit.component';
+import { CurrencyComponent } from './administrator/currency/currency.component';
+import { PlantComponent } from './administrator/plant/plant.component';
+import { RequestComponent } from './administrator/request/request.component';
+import { PrtypeComponent } from './administrator/prtype/prtype.component';
 
 
 @NgModule({
@@ -18,7 +25,14 @@ import { PrRecordComponent } from './pr-record/pr-record.component';
     SigninComponent,
     HeaderComponent,
     MainpageinfoComponent,
-    PrRecordComponent
+    PrRecordComponent,
+    AdministratorComponent,
+    SuppliersComponent,
+    UnitComponent,
+    CurrencyComponent,
+    PlantComponent,
+    RequestComponent,
+    PrtypeComponent
   ],
   imports: [
     BrowserModule,

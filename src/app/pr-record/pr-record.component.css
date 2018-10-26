@@ -11,9 +11,10 @@
 }
 
 .container-detail {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 10pt;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
 }
 
 .container-1 div,
@@ -42,6 +43,7 @@
 }
 
 .event-container {
+  margin-top: 5px;
   display: flex;
   justify-content: flex-end;
 }
@@ -66,8 +68,8 @@
 
 
   .container-detail {
-    display: flex;
-    flex-wrap: wrap;
+    /* display: flex;
+    flex-wrap: wrap; */
     /*
         flex-direction: column;
         */

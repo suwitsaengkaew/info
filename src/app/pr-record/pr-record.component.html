@@ -3,42 +3,39 @@
     <div class="panel-heading">Purchasing Order Record</div>
     <div class="panel-body" id="panel-body">
       <div>
-        <form>
+        <form [formGroup]="prrecordForm" (ngSubmit)="onSubmitpr()">
           <div class="container-1">
             <!-- container-1 -->
 
             <div class="input-group" style="margin-top: 5px;">
-              <span class="input-group-addon" style="width: 150px; text-align: right;" id="basic-prtype">PR Type :
-              </span>
-              <select #prtype class="form-control input-sm" aria-describedby="basic-prtype" id="prtype" style="width: 200px;"
-                tabindex="1">
+              <span class="input-group-addon" style="width: 100px; text-align: right;" id="basic-prtype">PR Type :</span>
+              <select #prtype class="form-control input-sm" aria-describedby="basic-prtype" id="prtype" style="width: 150px;"
+                tabindex="1" formControlName="pr_type">
                 <option></option>
               </select>
             </div>
             <div class="input-group" style="margin-top: 5px;">
-              <span class="input-group-addon" style="width: 150px; text-align: right;" id="basic-plant">PR Plant :
-              </span>
-              <select #plant class="form-control input-sm" aria-describedby="basic-plant" id="plant" style="width: 200px;"
-                tabindex="2">
+              <span class="input-group-addon" style="width: 100px; text-align: right;" id="basic-plant">PR Plant :</span>
+              <select #plant class="form-control input-sm" aria-describedby="basic-plant" id="plant" style="width: 150px;"
+                tabindex="2" formControlName="pr_plant">
                 <option value=""></option>
               </select>
             </div>
 
             <div class="input-group" style="margin-top: 5px;">
-              <span class="input-group-addon" style="width: 150px; text-align: right;" id="basic-profitcenter">Profit
-                Center
-                : </span>
+              <span class="input-group-addon" style="width: 100px; text-align: right;" id="basic-profitcenter">ProfitCenter
+                :</span>
               <select #profit class="form-control input-sm" aria-describedby="basic-profitcenter" id="profitcenter"
-                style="width: 200px;" tabindex="4">
+                style="width: 150px;" tabindex="4" formControlName="pr_profitCenter">
                 <option value=""></option>
               </select>
             </div>
 
             <div class="input-group" style="margin-top: 5px;">
-              <span class="input-group-addon" style="width: 150px; text-align: right;" id="basic-requestby">Request
-                By : </span>
-              <select #requestby class="form-control input-sm" aria-describedby="basic-requestby" id="requestby" style="width: 200px;"
-                tabindex="5">
+              <span class="input-group-addon" style="width: 100px; text-align: right;" id="basic-requestby">Request
+                By :</span>
+              <select #requestby class="form-control input-sm" aria-describedby="basic-requestby" id="requestby" style="width: 150px;"
+                tabindex="5" formControlName="pr_requestby">
                 <option value=""></option>
               </select>
             </div>
@@ -51,35 +48,32 @@
             <!-- container-2 -->
             <!-- PR Number -->
             <div class="input-group" style="margin-top: 5px;">
-              <span class="input-group-addon" style="width: 150px; text-align: right;" id="basic-prnumber">PR Number
-                :
-              </span>
-              <input #prnumber id="prnumber" type="text" style="width: 200px;" class="form-control input-sm"
-                aria-describedby="basic-prnumber" tabindex="6">
+              <span class="input-group-addon" style="width: 100px; text-align: right;" id="basic-prnumber">PR No.
+                :</span>
+              <input #prnumber id="prnumber" type="text" style="width: 150px;" class="form-control input-sm"
+                aria-describedby="basic-prnumber" tabindex="6" formControlName="pr_no">
             </div>
 
             <div class="input-group" style="margin-top: 5px;">
-              <span class="input-group-addon" style="width: 150px; text-align: right;" id="basic-suppliername">Supplier
-                : </span>
+              <span class="input-group-addon" style="width: 100px; text-align: right;" id="basic-suppliername">Supplier
+                :</span>
               <select #suppliername class="form-control input-sm" aria-describedby="basic-suppliername" id="suppliername"
-                style="width: 200px;" tabindex="10">
+                style="width: 200px;" tabindex="10" formControlName="pr_supplier">
                 <option></option>
               </select>
             </div>
 
             <div class="input-group" style="margin-top: 5px;">
-              <span class="input-group-addon" style="width: 100px; text-align: right;" id="basic-prdate">PR Date :
+              <span class="input-group-addon" style="width: 100px; text-align: right;" id="basic-prdate">PR Date:
               </span>
               <input #prdate id="prdate" type="date" style="width: 150px;" class="form-control input-sm"
-                aria-describedby="basic-prdate" tabindex="7">
+                aria-describedby="basic-prdate" tabindex="7" formControlName="pr_date">
             </div>
 
             <div class="input-group" style="margin-top: 5px;">
-              <span class="input-group-addon" style="width: 150px; text-align: right;" id="basic-prinvnumber">Inv No
-                :
-              </span>
-              <input #invnumber id="prinvnumber" type="text" style="width: 200px;" class="form-control input-sm"
-                aria-describedby="basic-prinvnumber" tabindex="9">
+              <span class="input-group-addon" style="width: 100px; text-align: right;" id="basic-prinvnumber">Inv No:</span>
+              <input #invnumber id="prinvnumber" type="text" style="width: 150px;" class="form-control input-sm"
+                aria-describedby="basic-prinvnumber" tabindex="9" formControlName="pr_invno">
             </div>
 
             <!-- Dlv Date -->
@@ -87,7 +81,7 @@
               <span class="input-group-addon" style="width: 100px; text-align: right;" id="basic-dlvdate">Dlv Date :
               </span>
               <input #dlvdate class="form-control input-sm" style="width: 150px;" id="dlvdate" type="date"
-                aria-describedby="basic-dlvdate" tabindex="8">
+                aria-describedby="basic-dlvdate" tabindex="8" formControlName="pr_duedate">
             </div>
             <!-- Dlv Date -->
 
@@ -97,59 +91,68 @@
             <div class="button-container">
               <!-- button-container -->
               <label class="btn btn-default" for="butplus">Increase item -> </label>
-              <button id="butplus" class="btn btn-primary">+</button>
+              <button id="butplus" class="btn btn-primary" (click)="addDetail()">+</button>
             </div> <!-- button-container -->
 
-            <div class="container-detail">
-              <!-- Description -->
-              <div class="input-group" style="margin-top: 5px;">
-                <span class="input-group-addon" style="width: 100px; text-align: right;" id="basic-desc">Desc:</span>
-                <input #desc id="desc" class="form-control input-sm" type="text" style="width: 250px;" aria-describedby="basic-desc"
-                  tabindex="11">
-              </div>
+            <div formArrayName="pr_detail">
+              <div class="container-detail" *ngFor="let pr_detailCtrl of prrecordForm.get('pr_detail').controls; let i = index" [formGroupName]="i">
+                <!-- Description -->
+                <!-- <input #desc id="desc" class="form-control input-sm" type="text" style="width: 200px;"
+                    aria-describedby="basic-desc" tabindex="11" placeholder="Description"> -->
+                <div class="input-group" style="margin-top: 5px;">
+                  <span class="input-group-addon" style="width: 100px; text-align: right;" id="basic-desc">Desc:</span>
+                  <input #desc id="desc" class="form-control input-sm" type="text" style="width: 200px;"
+                    aria-describedby="basic-desc" tabindex="11" formControlName="pr_desc">
+                </div>
 
-              <!-- Remark -->
-              <div class="input-group" style="margin-top: 5px;">
-                <span class="input-group-addon" style="width: 100px; text-align: right;" id="basic-remark">Remark
-                  :</span>
-                <input #prremark type="text" id="prremark" class="form-control input-sm" style="width: 250px;"
-                  aria-describedby="basic-remark" tabindex="16">
-              </div>
+                <!-- Remark -->
+                <!-- <input #prremark type="text" id="prremark" class="form-control input-sm" style="width: 200px;"
+                    aria-describedby="basic-remark" tabindex="16" placeholder="Remark"> -->
+                <div class="input-group" style="margin-top: 5px;">
+                  <span class="input-group-addon" style="width: 100px; text-align: right;" id="basic-remark">Remark
+                    :</span>
+                  <input #prremark type="text" id="prremark" class="form-control input-sm" style="width: 200px;"
+                    aria-describedby="basic-remark" tabindex="16" formControlName="pr_remark">
+                </div>
 
-              <!-- Quantity -->
-              <div class="input-group" style="margin-top: 5px;">
-                <span class="input-group-addon" style="width: 100px; text-align: right;" id="basic-qty">Qty:</span>
-                <input #qty id="qty" class="form-control input-sm" type="number" style="width: 80px;" maxlength="3"
-                  aria-describedby="basic-qty" tabindex="12">
-              </div>
+                <!-- Quantity -->
+                <!-- <input #qty id="qty" class="form-control input-sm" type="number" style="width: 60px;" maxlength="4"
+                    aria-describedby="basic-qty" tabindex="12" placeholder="Qty"> -->
+                <div class="input-group" style="margin-top: 5px;">
+                  <span class="input-group-addon" style="width: 50px; text-align: right;" id="basic-qty">Qty:</span>
+                  <input #qty id="qty" class="form-control input-sm" type="number" style="width: 60px;" maxlength="4"
+                    aria-describedby="basic-qty" tabindex="12" formControlName="pr_qty">
+                </div>
 
-              <!-- Unit -->
-              <div class="input-group" style="margin-top: 5px;">
-                <span class="input-group-addon" style="width: 100px; text-align: right;" id="basic-unit">Unit :
-                </span>
-                <select #unit class="form-control input-sm" aria-describedby="basic-unit" id="unit" style="width: 80px;"
-                  tabindex="13">
-                  <option></option>
-                </select>
-              </div>
+                <!-- Unit -->
+                <div class="input-group" style="margin-top: 5px;">
+                  <span class="input-group-addon" style="width: 50px; text-align: right;" id="basic-unit">Unit :
+                  </span>
+                  <select #unit class="form-control input-sm" aria-describedby="basic-unit" id="unit" style="width: 80px;"
+                    tabindex="13" formControlName="pr_unit">
+                    <option></option>
+                  </select>
+                </div>
 
-              <!-- Unit Price -->
-              <div class="input-group" style="margin-top: 5px;">
-                <span class="input-group-addon" style="width: 100px; text-align: right;" id="basic-unitprice">Unit
-                  Price :</span>
-                <input #unitprice id="unitprice" class="form-control input-sm" type="number" style="width: 80px;"
-                  aria-describedby="basic-unitprice" tabindex="14">
-              </div>
+                <!-- Unit Price -->
+                <!-- <input #unitprice id="unitprice" class="form-control input-sm" type="number" style="width: 100px;"
+                    aria-describedby="basic-unitprice" tabindex="14" placeholder="Price"> -->
+                <div class="input-group" style="margin-top: 5px;">
+                  <span class="input-group-addon" style="width: 80px; text-align: right;" id="basic-unitprice">Price :</span>
+                  <input #unitprice id="unitprice" class="form-control input-sm" type="number" style="width: 100px;"
+                    aria-describedby="basic-unitprice" tabindex="14" formControlName="pr_price">
+                </div>
 
-              <!-- Currency -->
-              <div class="input-group" style="margin-top: 5px;">
-                <span class="input-group-addon" style="width: 100px; text-align: right;" id="basic-curr">Currency
-                  :
-                </span>
-                <select #currency class="form-control input-sm" aria-describedby="basic-curr" id="curr" style="width: 80px;"
-                  tabindex="15">
-                  <option></option>
-                </select>
+                <!-- Currency -->
+                <div class="input-group" style="margin-top: 5px;">
+                  <span class="input-group-addon" style="width: 100px; text-align: right;" id="basic-curr">Currency
+                    :</span>
+                  <select #currency class="form-control input-sm" aria-describedby="basic-curr" id="curr" style="width: 80px;"
+                    tabindex="15" formControlName="pr_curr">
+                    <option></option>
+                  </select>
+                </div>
+                <!-- <button id="butminutes" class="btn btn-danger">-</button> -->
               </div>
             </div>
           </div>
