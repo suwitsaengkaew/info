@@ -90,8 +90,8 @@
           <div class="item-container">
             <div class="button-container">
               <!-- button-container -->
-              <label class="btn btn-default" for="butplus">Increase item -> </label>
-              <button id="butplus" class="btn btn-primary" (click)="addDetail()">+</button>
+              <label class="btn btn-default" for="butplus">Increase item -> <button id="butplus" class="btn btn-primary" (click)="addDetail()">+</button> </label>
+              
             </div> <!-- button-container -->
 
             <div formArrayName="pr_detail">
@@ -151,8 +151,12 @@
                     tabindex="15" formControlName="pr_curr">
                     <option></option>
                   </select>
+                  
                 </div>
-                <!-- <button id="butminutes" class="btn btn-danger">-</button> -->
+                <div>
+                  <button id="butplus" class="btn btn-danger input-sm" (click)="addDetail()">-</button>
+                </div>
+                
               </div>
             </div>
           </div>
