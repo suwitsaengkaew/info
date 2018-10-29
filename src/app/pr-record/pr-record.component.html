@@ -8,33 +8,33 @@
             <!-- container-1 -->
 
             <div class="input-group" style="margin-top: 5px;">
-              <span class="input-group-addon" style="width: 100px; text-align: right;" id="basic-prtype">PR Type :</span>
-              <select #prtype class="form-control input-sm" aria-describedby="basic-prtype" id="prtype" style="width: 150px;"
+              <span class="input-group-addon" id="basic-prtype">PR Type :</span>
+              <select #prtype class="form-control input-sm" aria-describedby="basic-prtype" id="prtype"
                 tabindex="1" formControlName="pr_type">
                 <option></option>
               </select>
             </div>
             <div class="input-group" style="margin-top: 5px;">
-              <span class="input-group-addon" style="width: 100px; text-align: right;" id="basic-plant">PR Plant :</span>
-              <select #plant class="form-control input-sm" aria-describedby="basic-plant" id="plant" style="width: 150px;"
+              <span class="input-group-addon" id="basic-plant">PR Plant :</span>
+              <select #plant class="form-control input-sm" aria-describedby="basic-plant" id="plant"
                 tabindex="2" formControlName="pr_plant">
                 <option value=""></option>
               </select>
             </div>
 
             <div class="input-group" style="margin-top: 5px;">
-              <span class="input-group-addon" style="width: 100px; text-align: right;" id="basic-profitcenter">ProfitCenter
+              <span class="input-group-addon"id="basic-profitcenter">ProfitCenter
                 :</span>
               <select #profit class="form-control input-sm" aria-describedby="basic-profitcenter" id="profitcenter"
-                style="width: 150px;" tabindex="4" formControlName="pr_profitCenter">
+                tabindex="4" formControlName="pr_profitCenter">
                 <option value=""></option>
               </select>
             </div>
 
             <div class="input-group" style="margin-top: 5px;">
-              <span class="input-group-addon" style="width: 100px; text-align: right;" id="basic-requestby">Request
+              <span class="input-group-addon" id="basic-requestby">Request
                 By :</span>
-              <select #requestby class="form-control input-sm" aria-describedby="basic-requestby" id="requestby" style="width: 150px;"
+              <select #requestby class="form-control input-sm" aria-describedby="basic-requestby" id="requestby"
                 tabindex="5" formControlName="pr_requestby">
                 <option value=""></option>
               </select>
@@ -48,39 +48,39 @@
             <!-- container-2 -->
             <!-- PR Number -->
             <div class="input-group" style="margin-top: 5px;">
-              <span class="input-group-addon" style="width: 100px; text-align: right;" id="basic-prnumber">PR No.
+              <span class="input-group-addon" id="basic-prnumber">PR No.
                 :</span>
-              <input #prnumber id="prnumber" type="text" style="width: 150px;" class="form-control input-sm"
+              <input #prnumber id="prnumber" type="text" class="form-control input-sm"
                 aria-describedby="basic-prnumber" tabindex="6" formControlName="pr_no">
             </div>
 
             <div class="input-group" style="margin-top: 5px;">
-              <span class="input-group-addon" style="width: 100px; text-align: right;" id="basic-suppliername">Supplier
+              <span class="input-group-addon" id="basic-suppliername">Supplier
                 :</span>
               <select #suppliername class="form-control input-sm" aria-describedby="basic-suppliername" id="suppliername"
-                style="width: 200px;" tabindex="10" formControlName="pr_supplier">
+                tabindex="10" formControlName="pr_supplier">
                 <option></option>
               </select>
             </div>
 
             <div class="input-group" style="margin-top: 5px;">
-              <span class="input-group-addon" style="width: 100px; text-align: right;" id="basic-prdate">PR Date:
+              <span class="input-group-addon" id="basic-prdate">PR Date:
               </span>
-              <input #prdate id="prdate" type="date" style="width: 150px;" class="form-control input-sm"
+              <input #prdate id="prdate" type="date" class="form-control input-sm"
                 aria-describedby="basic-prdate" tabindex="7" formControlName="pr_date">
             </div>
 
             <div class="input-group" style="margin-top: 5px;">
-              <span class="input-group-addon" style="width: 100px; text-align: right;" id="basic-prinvnumber">Inv No:</span>
-              <input #invnumber id="prinvnumber" type="text" style="width: 150px;" class="form-control input-sm"
+              <span class="input-group-addon" id="basic-prinvnumber">Inv No:</span>
+              <input #invnumber id="prinvnumber" type="text" class="form-control input-sm"
                 aria-describedby="basic-prinvnumber" tabindex="9" formControlName="pr_invno">
             </div>
 
             <!-- Dlv Date -->
             <div class="input-group" style="margin-top: 5px;">
-              <span class="input-group-addon" style="width: 100px; text-align: right;" id="basic-dlvdate">Dlv Date :
+              <span class="input-group-addon" id="basic-dlvdate">Dlv Date :
               </span>
-              <input #dlvdate class="form-control input-sm" style="width: 150px;" id="dlvdate" type="date"
+              <input #dlvdate class="form-control input-sm" id="dlvdate" type="date"
                 aria-describedby="basic-dlvdate" tabindex="8" formControlName="pr_duedate">
             </div>
             <!-- Dlv Date -->
@@ -157,7 +157,7 @@
             </div>
           </div>
           <div class="event-container">
-            <button id="savebutton" class="btn btn-success">Send to Database</button>
+            <button id="savebutton" [disabled]="prrecordForm.value" class="btn btn-success">Send to Database</button>
             <button id="clearbutton" class="btn btn-danger">Clear form</button>
           </div>
         </form>

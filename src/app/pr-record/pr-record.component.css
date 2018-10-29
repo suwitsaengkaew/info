@@ -1,3 +1,30 @@
+#basic-prtype,
+#basic-plant,
+#basic-profitcenter,
+#basic-requestby,
+#basic-prnumber,
+#basic-suppliername,
+#basic-prdate,
+#basic-prinvnumber,
+#basic-dlvdate
+ {
+  width: 100px;
+  text-align: right;
+}
+
+#prtype,
+#plant,
+#profitcenter,
+#requestby,
+#prnumber,
+#suppliername,
+#prdate,
+#prinvnumber,
+#dlvdate
+ {
+  width: 150px;
+}
+
 .container-1 {
   display: flex;
   flex-direction: row;
@@ -66,13 +93,35 @@
     flex-direction: column;
   }
 
+  #basic-prtype,
+  #basic-plant,
+  #basic-profitcenter,
+  #basic-requestby,
+  #basic-prnumber,
+  #basic-suppliername,
+  #basic-prdate,
+  #basic-prinvnumber,
+  #basic-dlvdate
+  {
+    width: 150px;
+    text-align: right;
+  }
+
+  #prtype,
+  #plant,
+  #profitcenter,
+  #requestby,
+  #prnumber,
+  #suppliername,
+  #prdate,
+  #prinvnumber,
+  #dlvdate {
+    width: 200px;
+  }
 
   .container-detail {
-    /* display: flex;
-    flex-wrap: wrap; */
-    /*
-        flex-direction: column;
-        */
+    display: flex;
+    flex-direction: column;
   }
 }
 
