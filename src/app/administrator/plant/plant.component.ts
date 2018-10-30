@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./plant.component.css']
 })
 export class PlantComponent implements OnInit {
-
+  title = 'Plant Register';
   constructor() { }
 
   ngOnInit() {

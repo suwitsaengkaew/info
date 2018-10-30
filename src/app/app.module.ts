@@ -2,8 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app.router';
+import { HttpModule } from '@angular/http';
 
 import { AuthService } from './auth/auth.service';
+import { AdminService } from './administrator/admin.service';
 
 import { AppComponent } from './app.component';
 import { SigninComponent } from './auth/signin/signin.component';
@@ -37,10 +39,11 @@ import { PrtypeComponent } from './administrator/prtype/prtype.component';
   imports: [
     BrowserModule,
     FormsModule,
+    HttpModule,
     ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, AdminService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

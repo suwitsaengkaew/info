@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./prtype.component.css']
 })
 export class PrtypeComponent implements OnInit {
-
+  title = 'PR Type Register';
   constructor() { }
 
   ngOnInit() {

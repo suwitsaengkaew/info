@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./request.component.css']
 })
 export class RequestComponent implements OnInit {
-
+  title = 'RequestBy Register';
   constructor() { }
 
   ngOnInit() {

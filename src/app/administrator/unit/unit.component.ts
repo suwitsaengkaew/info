@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./unit.component.css']
 })
 export class UnitComponent implements OnInit {
-
+  title = 'Unit Register';
   constructor() { }
 
   ngOnInit() {

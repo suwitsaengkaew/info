@@ -12,7 +12,7 @@ const appRoutes: Routes = [
     { path: 'signin', component: SigninComponent },
     { path: 'mainpage', component: MainpageinfoComponent },
     { path: 'prrecord', component: PrRecordComponent },
-    { path: 'admin', component: AdministratorComponent}
+    { path: 'admin', component: AdministratorComponent},
 ];
 
 @NgModule({
