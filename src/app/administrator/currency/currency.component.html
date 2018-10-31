@@ -1,13 +1,12 @@
 <div class="panel panel-primary">
-    <div class="panel-heading">{{ title }}</div>
-    <div class="panel-body">
-        <div *ngFor="let curr of currArray; let i = index;">
-            {{i+1}} {{ curr.curr }}
-            
-        </div>
-        <div>
-            <input #curr id="curr" type="text" class="form-control input-sm" placeholder="Currency Name">
-            <button [disabled]="!curr.value" class="btn btn-primary" type="button" (click)="Add(curr.value)">Add</button>
-        </div>
+  <div class="panel-heading">{{ title }}</div>
+  <div class="panel-body">
+    <div *ngFor="let curr of currArray; let i = index;">
+      <button class="btn btn-danger" (click)="deleteitem(i)">-</button> {{i+1}} - {{ curr.curr }}
+    </div>
+    <div>
+      <input #curr id="curr" type="text" class="form-control" placeholder="Currency Name">
+      <button [disabled]="!curr.value" class="btn btn-primary" type="button" (click)="Add(curr.value)">Add</button>
     </div>
   </div>
+</div>

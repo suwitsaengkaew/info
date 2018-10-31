@@ -41,21 +41,9 @@ export class CurrencyComponent implements OnInit {
     } else {
       this.curr.nativeElement.value = '';
     }
+  }
 
-    // if (this.currArrayLen !== 0) {
-    //   const checkCurrDup = this.currArray.indexOf({ curr: curr });
-    //   if (checkCurrDup !== -1) {
-    //     console.log('Item is duplicate!');
-    //   } else {
-    //     console.log(checkCurrDup);
-    //     this.currArray.push({ curr: curr });
-    //     this.adminService.OnSaveCurrency(this.currArray);
-    //     this.curr.nativeElement.value = '';
-    //   }
-    // } else {
-    //   this.currArray.push({ curr: 'test' });
-    //   this.adminService.OnSaveCurrency(this.currArray);
-    //   this.curr.nativeElement.value = '';
-    // }
+  deleteitem(index: number) {
+    this.currArray.splice(index, 1);
   }
 }
