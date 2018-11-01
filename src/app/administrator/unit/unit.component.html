@@ -1,4 +1,14 @@
 <div class="panel panel-primary">
   <div class="panel-heading">{{ title }}</div>
-  <div class="panel-body"></div>
+  <div class="panel-body">
+    <div *ngFor="let unit of unitArray; let i = index;">
+      <div class="forminput">
+        <button class="btn btn-danger" (click)="deleteitem(i)">-</button> {{i+1}} - {{ unit.unit }}
+      </div>
+    </div>
+    <div class="form-inline">
+      <input #unit id="unit" type="text" class="form-control" placeholder="Unit Name">
+      <button id="addbtn" [disabled]="!unit.value" class="btn btn-primary" type="button" (click)="Add(unit.value)">Add</button>
+    </div>
+  </div>
 </div>

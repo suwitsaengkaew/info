@@ -1,4 +1,14 @@
 <div class="panel panel-primary">
   <div class="panel-heading">{{ title }}</div>
-  <div class="panel-body"></div>
+  <div class="panel-body">
+    <div *ngFor="let plant of plantArray; let i = index;">
+      <div class="forminput">
+        <button class="btn btn-danger" (click)="deleteitem(i)">-</button> {{i+1}} - {{ plant.plantName }}
+      </div>
+    </div>
+    <div class="form-inline">
+      <input #plant id="plant" type="text" class="form-control" placeholder="Plant Name">
+      <button id="addbtn" [disabled]="!plant.value" class="btn btn-primary" type="button" (click)="Add(plant.value)">Add</button>
+    </div>
+  </div>
 </div>

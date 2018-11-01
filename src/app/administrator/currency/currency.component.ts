@@ -19,6 +19,7 @@ export class CurrencyComponent implements OnInit {
         (res) => {
           if (res.json() === null) {
             this.currArray.push({ curr: 'THB' });
+            this.adminService.OnSaveCurrency(this.currArray);
           } else {
             this.currArray = res.json();
           }
@@ -45,5 +46,6 @@ export class CurrencyComponent implements OnInit {
 
   deleteitem(index: number) {
     this.currArray.splice(index, 1);
+    this.adminService.OnSaveCurrency(this.currArray);
   }
 }

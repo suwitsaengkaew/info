@@ -1,42 +1,11 @@
-#curr {
+input {
     width: 200px;
 }
-button {
-    margin: 5px;
+
+#addbtn {
+    width: 100px;
 }
 
-.div1 {
-    border: 1px solid black;
-    width: 400px;
-}
-
-.flexbox {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    border: 1px solid rebeccapurple;
-    max-width: 500px;
-    justify-content: center;
-    align-items: center;
-}
-
-.box1,
-.box2,
-.box3 {
-    margin: 5px;
-    max-width: 200px;
-    border: 1px solid blue;
-}
-
-.box1 {
-    
-
-}
-
-.box2 {
-
-}
-
-.box3{
-    
+.forminput {
+    margin: 3px;
 }

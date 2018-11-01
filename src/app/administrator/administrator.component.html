@@ -1,8 +1,15 @@
 <div class="container-fluid">
-  <app-prtype></app-prtype>
-  <app-plant></app-plant>
-  <app-request></app-request>
-  <app-suppliers></app-suppliers>
-  <app-unit></app-unit>
-  <app-currency></app-currency>
+  <div class="container">
+    <select name="" id="" (change)="onSelectRegisterItems($event)">
+      <option value="1">PR TYPE</option>
+    </select>
+  </div>
+  <div class="container">
+    <app-prtype *ngIf="prtype"></app-prtype>
+    <app-plant *ngIf="prplant"></app-plant>
+    <app-request *ngIf="prrequestby"></app-request>
+    <app-suppliers *ngIf="prsuppliers"></app-suppliers>
+    <app-unit *ngIf="prunit"></app-unit>
+    <app-currency *ngIf="prcurrency"></app-currency>
+  </div>
 </div>

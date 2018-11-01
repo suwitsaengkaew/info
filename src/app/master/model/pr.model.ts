@@ -7,7 +7,6 @@ export class MonthModel {
 
 export class RequestbyModel {
     constructor (
-        public id: string,
         public requestName: string
     ) {}
 }
@@ -35,8 +34,13 @@ export class InvestmentModel {
 
 export class PlantModel {
     constructor (
-        public plantNo: string,
         public plantName: string
+    ) {}
+}
+
+export class PrTypeModel {
+    constructor (
+        public prtype: string
     ) {}
 }
 
