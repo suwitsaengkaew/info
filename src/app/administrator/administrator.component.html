@@ -1,7 +1,13 @@
 <div class="container-fluid">
   <div class="container">
-    <select name="" id="" (change)="onSelectRegisterItems($event)">
+    <select name="" id="" (change)="onSelectRegisterItems($event.target.value)">
+      <option value="0">Please select!!</option>
       <option value="1">PR TYPE</option>
+      <option value="2">PR Plant</option>
+      <option value="3">PR RequestBy</option>
+      <option value="4">PR Supplier</option>
+      <option value="5">PR Unit</option>
+      <option value="6">PR Currency</option>
     </select>
   </div>
   <div class="container">
