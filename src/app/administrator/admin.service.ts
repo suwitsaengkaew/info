@@ -55,23 +55,23 @@ export class AdminService {
         return this.http.get('https://yoko-dev-6f6a4.firebaseio.com/plants.json');
     }
 
+    /* Unit Section */
+    OnDelUnit(unit: UnitsModel[]) {
+        return this.http.put('http://info.ytmt.co.th/pr/delpr_stunit', JSON.stringify(unit).toString());
+    }
+
     OnSaveUnit(unit: UnitsModel[]) {
-        const _headers = new Headers({ 'Content-Type': 'application/json' });
-        this.http.put('https://yoko-dev-6f6a4.firebaseio.com/unit.json', unit, {headers : _headers} )
-        .subscribe(
-            (response: Response) => {
-                console.log(response);
-            }
-        );
+        return this.http.put('http://info.ytmt.co.th/pr/putpr_stunit', JSON.stringify(unit).toString());
     }
 
     OnGetUnit() {
-        return this.http.get('https://yoko-dev-6f6a4.firebaseio.com/unit.json');
+        return this.http.get('http://info.ytmt.co.th/pr/getpr_stunit');
     }
+    /* Unit Section */
 
-    OnSavePrType(unit: PrTypeModel[]) {
-        const _headers = new Headers({ 'Content-Type': 'application/json' });
-        this.http.put('https://yoko-dev-6f6a4.firebaseio.com/pr.json', unit, {headers : _headers} )
+    OnSavePrType(prtype: PrTypeModel[]) {
+        // const _headers = new Headers({ 'Content-Type': 'application/json' });
+        this.http.put('https://yoko-dev-6f6a4.firebaseio.com/pr.json', prtype)
         .subscribe(
             (response: Response) => {
                 console.log(response);

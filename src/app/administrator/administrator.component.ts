@@ -19,36 +19,34 @@ export class AdministratorComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSelectRegisterItems(key: any) {
-    
-    switch (key) {
+  onSelectRegisterItems(key) {
+    const _key = +key; // or const _key = parseInt(key, 0);
+    this.prtype = false;
+    this.prplant = false;
+    this.prrequestby = false;
+    this.prsuppliers = false;
+    this.prunit = false;
+    this.prcurrency = false;
+
+    switch (_key) {
       case 1:
-        console.log(key);
+        this.prtype = !this.prtype;
         break;
-      default:
+      case 2:
+        this.prplant = !this.prplant;
+        break;
+      case 3:
+        this.prrequestby = !this.prrequestby;
+        break;
+      case 4:
+        this.prsuppliers = !this.prsuppliers;
+        break;
+      case 5:
+        this.prunit = !this.prunit;
+        break;
+      case 6:
+        this.prcurrency = !this.prcurrency;
         break;
     }
-    // console.log(key);
-    // switch (key) {
-    //   case 1:
-    //     console.log(key);
-    //     this.prtype = !this.prtype;
-    //     break;
-      // case 2:
-      //   this.prplant = !this.prplant;
-      //   break;
-      // case 3:
-      //   this.prrequestby = !this.prrequestby;
-      //   break;
-      // case 4:
-      //   this.prsuppliers = !this.prsuppliers;
-      //   break;
-      // case 5:
-      //   this.prunit = !this.prunit;
-      //   break;
-      // case 6:
-      //   this.prcurrency = !this.prcurrency;
-      //   break;
-    // }
   }
 }

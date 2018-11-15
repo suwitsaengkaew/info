@@ -9,6 +9,8 @@
     <div class="form-inline">
       <input #unit id="unit" type="text" class="form-control" placeholder="Unit Name">
       <button id="addbtn" [disabled]="!unit.value" class="btn btn-primary" type="button" (click)="Add(unit.value)">Add</button>
+      <p *ngIf="serviceIsValid" style="color: red;">!!! Web Service problem. Please contact administrator !!!</p>
+      <p *ngIf="checkdup" style="color: red;">!!! Data input is duplicate !!!</p>
     </div>
   </div>
 </div>
