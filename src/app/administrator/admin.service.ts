@@ -13,47 +13,47 @@ import {
 export class AdminService {
     constructor(private http: Http) {}
 
+    /* Currency Section */
     OnSaveCurrency(curr: CurrenciesModel[]) {
-        const _headers = new Headers({ 'Content-Type': 'application/json' });
-        this.http.put('https://yoko-dev-6f6a4.firebaseio.com/currency.json', curr, {headers : _headers})
-        .subscribe(
-            (response: Response) => {
-                console.log(response);
-            }
-        );
+        return this.http.put('https://info.ytmt.co.th/pr/putpr_stcurrency', JSON.stringify(curr).toString());
+    }
+
+    OnDelCurrency(curr: CurrenciesModel[]) {
+        return this.http.put('https://info.ytmt.co.th/pr/delpr_stcurrency', JSON.stringify(curr).toString());
     }
 
     OnGetCurrency() {
-        return this.http.get('https://yoko-dev-6f6a4.firebaseio.com/currency.json');
+        return this.http.get('https://info.ytmt.co.th/pr/getpr_stcurrency');
+    }
+    /* Currency Section */
+
+    /* Suppliers Section */
+    OnSaveSuppliers(suppliers: SuppliersModel[]) {
+        return this.http.put('https://info.ytmt.co.th/pr/putpr_stsuppliers', JSON.stringify(suppliers).toString());
     }
 
-    OnSaveSuppliers(suppliers: SuppliersModel[]) {
-        const _headers = new Headers({ 'Content-Type': 'application/json' });
-        this.http.put('https://yoko-dev-6f6a4.firebaseio.com/suppliers.json', suppliers, {headers : _headers} )
-        .subscribe(
-            (response: Response) => {
-                console.log(response);
-            }
-        );
+    OnDelSuppliers(suppliers: SuppliersModel[]) {
+        return this.http.put('https://info.ytmt.co.th/pr/delpr_stsuppliers', JSON.stringify(suppliers).toString());
     }
 
     OnGetSuppliers() {
-        return this.http.get('https://yoko-dev-6f6a4.firebaseio.com/suppliers.json');
+        return this.http.get('https://info.ytmt.co.th/pr/getpr_stsuppliers');
+    }
+    /* Suppliers Section */
+
+    /* Plant Section */
+    OnSavePlant(plants: PlantModel[]) {
+        return this.http.put('https://info.ytmt.co.th/pr/putpr_stplant', JSON.stringify(plants).toString());
     }
 
-    OnSavePlant(plants: PlantModel[]) {
-        const _headers = new Headers({ 'Content-Type': 'application/json' });
-        this.http.put('https://yoko-dev-6f6a4.firebaseio.com/plants.json', plants, {headers : _headers} )
-        .subscribe(
-            (response: Response) => {
-                console.log(response);
-            }
-        );
+    OnDelPlant(plants: PlantModel[]) {
+        return this.http.put('https://info.ytmt.co.th/pr/delpr_stplant', JSON.stringify(plants).toString());
     }
 
     OnGetPlant() {
-        return this.http.get('https://yoko-dev-6f6a4.firebaseio.com/plants.json');
+        return this.http.get('https://info.ytmt.co.th/pr/getpr_stplant');
     }
+    /* Plant Section */
 
     /* Unit Section */
     OnDelUnit(unit: UnitsModel[]) {
@@ -69,31 +69,31 @@ export class AdminService {
     }
     /* Unit Section */
 
+    /* Type Section */
     OnSavePrType(prtype: PrTypeModel[]) {
-        // const _headers = new Headers({ 'Content-Type': 'application/json' });
-        this.http.put('https://yoko-dev-6f6a4.firebaseio.com/pr.json', prtype)
-        .subscribe(
-            (response: Response) => {
-                console.log(response);
-            }
-        );
+        return this.http.put('http://info.ytmt.co.th/pr/putpr_sttype', JSON.stringify(prtype).toString());
+    }
+
+    OnDelPrType(prtype: PrTypeModel[]) {
+        return this.http.put('http://info.ytmt.co.th/pr/delpr_sttype', JSON.stringify(prtype).toString());
     }
 
     OnGetPrType() {
-        return this.http.get('https://yoko-dev-6f6a4.firebaseio.com/pr.json');
+        return this.http.get('http://info.ytmt.co.th/pr/getpr_sttype');
+    }
+    /* Type Section */
+
+    /* Type Request */
+    OnSaveRequest(req: RequestbyModel[]) {
+        return this.http.put('http://info.ytmt.co.th/pr/putpr_streq', JSON.stringify(req).toString());
     }
 
-    OnSaveRequest(req: RequestbyModel[]) {
-        const _headers = new Headers({ 'Content-Type': 'application/json' });
-        this.http.put('https://yoko-dev-6f6a4.firebaseio.com/requestby.json', req, {headers : _headers} )
-        .subscribe(
-            (response: Response) => {
-                console.log(response);
-            }
-        );
+    OnDelRequest(req: RequestbyModel[]) {
+        return this.http.put('http://info.ytmt.co.th/pr/delpr_streq', JSON.stringify(req).toString());
     }
 
     OnGetRequest() {
-        return this.http.get('https://yoko-dev-6f6a4.firebaseio.com/requestby.json');
+        return this.http.get('http://info.ytmt.co.th/pr/getpr_streq');
     }
+    /* Type Request */
 }

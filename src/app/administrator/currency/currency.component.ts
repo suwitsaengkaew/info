@@ -1,4 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Response } from '@angular/http';
 import { AdminService } from '../admin.service';
 import { CurrenciesModel } from '../../master/model/pr.model';
 
@@ -9,43 +10,84 @@ import { CurrenciesModel } from '../../master/model/pr.model';
 })
 export class CurrencyComponent implements OnInit {
   title = 'Currency Register';
+  serviceIsValid = false;
+  checkdup = false;
   @ViewChild('curr') curr: ElementRef;
   currArray: CurrenciesModel[] = [];
   constructor(private adminService: AdminService) { }
 
   ngOnInit() {
     this.adminService.OnGetCurrency()
-      .subscribe(
-        (res) => {
-          if (res.json() === null) {
-            this.currArray.push({ curr: 'THB' });
-            this.adminService.OnSaveCurrency(this.currArray);
-          } else {
-            this.currArray = res.json();
-          }
-        },
-        (error) => console.log('Error initial data!! -> ' + error)
+      .toPromise()
+      .then(
+        (res: Response) => this.currArray = res.json()
+      )
+      .catch(
+        (error: Response) => {
+          console.log('Error initial data!! -> ' + error);
+          this.serviceIsValid = true;
+        }
       );
   }
 
   Add() {
-    const currency: string = this.curr.nativeElement.value;
-    if ( currency.trim() !== '') {
-      const checkDuplicate = this.currArray.indexOf({ curr: currency});
-      if (checkDuplicate !== -1) {
-        console.log('Item is duplicate!!');
-      } else {
-        this.currArray.push({ curr: this.curr.nativeElement.value });
+    const arrlen = this.currArray.length;
+    const curr: string = this.curr.nativeElement.value;
+    if (curr.trim() !== '') {
+      if (arrlen === 0) {
+        this.addfuction(curr);
         this.curr.nativeElement.value = '';
-        this.adminService.OnSaveCurrency(this.currArray);
+      } else {
+        let checkDuplicate: number;
+        this.currArray.forEach((checkdup) => {
+          checkDuplicate = checkdup.curr.indexOf(curr);
+        });
+        if (checkDuplicate !== -1) {
+          console.log('Item is duplicate!!');
+          this.checkdup = true;
+        } else {
+          this.addfuction(curr);
+          this.curr.nativeElement.value = '';
+          this.serviceIsValid = false;
+          this.checkdup = false;
+        }
       }
     } else {
       this.curr.nativeElement.value = '';
     }
   }
 
+  private addfuction(curr: string) {
+    this.adminService.OnSaveCurrency([{ curr: curr }])
+      .toPromise()
+      .then(
+        (response: Response) => {
+          console.log(response);
+          this.currArray.push({ curr: curr });
+        }
+      )
+      .catch(
+        (error: Response) => {
+          console.log(error);
+          this.serviceIsValid = !this.serviceIsValid;
+        }
+      );
+  }
+
   deleteitem(index: number) {
-    this.currArray.splice(index, 1);
-    this.adminService.OnSaveCurrency(this.currArray);
+    const _curr = this.currArray[index].curr;
+    this.adminService.OnDelCurrency([{ curr: _curr }])
+      .toPromise()
+      .then(
+        (response: Response) => {
+          console.log(response);
+          this.currArray.splice(index, 1);
+        }
+      )
+      .catch(
+        (error: Response) => {
+          console.log(error);
+        }
+      );
   }
 }

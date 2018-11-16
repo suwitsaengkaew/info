@@ -7,6 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdministratorComponent implements OnInit {
 
+  optionArray = [
+    { id: 0, optionname: 'Please select!!' },
+    { id: 1, optionname: 'PR TYPE' },
+    { id: 2, optionname: 'PR Plant' },
+    { id: 3, optionname: 'PR RequestBy' },
+    { id: 4, optionname: 'PR Supplier' },
+    { id: 5, optionname: 'PR Unit' },
+    { id: 6, optionname: 'PR Currency' },
+  ];
+
   prtype = false;
   prplant = false;
   prrequestby = false;

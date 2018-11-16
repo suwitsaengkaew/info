@@ -1,4 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Response } from '@angular/http';
 import { AdminService } from '../admin.service';
 import { PrTypeModel } from '../../master/model/pr.model';
 
@@ -9,43 +10,84 @@ import { PrTypeModel } from '../../master/model/pr.model';
 })
 export class PrtypeComponent implements OnInit {
   title = 'PR Type Register';
+  serviceIsValid = false;
+  checkdup = false;
   @ViewChild('pr') pr: ElementRef;
   prTypeArray: PrTypeModel[] = [];
   constructor(private adminService: AdminService) { }
 
   ngOnInit() {
     this.adminService.OnGetPrType()
-      .subscribe(
-        (res) => {
-          if (res.json() === null) {
-            this.prTypeArray.push({ prtype : 'Investment' });
-            this.adminService.OnSavePrType(this.prTypeArray);
-          } else {
-            this.prTypeArray = res.json();
-          }
-        },
-        (error) => console.log('Error initial data!! -> ' + error)
+      .toPromise()
+      .then(
+        (res: Response) => this.prTypeArray = res.json()
+      )
+      .catch(
+        (error: Response) => {
+          console.log('Error initial data!! -> ' + error);
+          this.serviceIsValid = true;
+        }
       );
   }
 
   Add() {
+    const arrlen = this.prTypeArray.length;
     const pr: string = this.pr.nativeElement.value;
     if (pr.trim() !== '') {
-      const checkDuplicate = this.prTypeArray.indexOf({ prtype: pr });
-      if (checkDuplicate !== -1) {
-        console.log('Item is duplicate!!');
-      } else {
-        this.prTypeArray.push({ prtype: this.pr.nativeElement.value });
+      if (arrlen === 0) {
+        this.addfuction(pr);
         this.pr.nativeElement.value = '';
-        this.adminService.OnSavePrType(this.prTypeArray);
+      } else {
+        let checkDuplicate: number;
+        this.prTypeArray.forEach((checkdup) => {
+          checkDuplicate = checkdup.prtype.indexOf(pr);
+        });
+        if (checkDuplicate !== -1) {
+          console.log('Item is duplicate!!');
+          this.checkdup = true;
+        } else {
+          this.addfuction(pr);
+          this.pr.nativeElement.value = '';
+          this.serviceIsValid = false;
+          this.checkdup = false;
+        }
       }
     } else {
       this.pr.nativeElement.value = '';
     }
   }
 
+  private addfuction(pr: string) {
+    this.adminService.OnSavePrType([{ prtype: pr }])
+      .toPromise()
+      .then(
+        (response: Response) => {
+          console.log(response);
+          this.prTypeArray.push({ prtype: pr });
+        }
+      )
+      .catch(
+        (error: Response) => {
+          console.log(error);
+          this.serviceIsValid = !this.serviceIsValid;
+        }
+      );
+  }
+
   deleteitem(index: number) {
-    this.prTypeArray.splice(index, 1);
-    this.adminService.OnSavePrType(this.prTypeArray);
+    const _pr = this.prTypeArray[index].prtype;
+    this.adminService.OnDelPrType([{ prtype: _pr }])
+      .toPromise()
+      .then(
+        (response: Response) => {
+          console.log(response);
+          this.prTypeArray.splice(index, 1);
+        }
+      )
+      .catch(
+        (error: Response) => {
+          console.log(error);
+        }
+      );
   }
 }

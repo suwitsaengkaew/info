@@ -17,85 +17,76 @@ export class UnitComponent implements OnInit {
 
   ngOnInit() {
     this.adminService.OnGetUnit()
-      .subscribe(
-        (res) => {
-          if (res.json().length === 0) {
-            // this.unitArray.push();
-            this.adminService.OnSaveUnit([{ unit: 'SET' }])
-            .toPromise()
-            .then(
-              (response: Response) => {
-                this.unitArray.push({ unit: 'SET' });
-              }
-            )
-            .catch(
-              (error: Response) => {
-                console.log(error);
-                this.serviceIsValid = !this.serviceIsValid;
-              }
-            );
-          } else {
-            this.unitArray = res.json();
-          }
-        },
-        (error) => console.log('Error initial data!! -> ' + error)
+      .toPromise()
+      .then(
+        (res: Response) => this.unitArray = res.json()
+      )
+      .catch(
+        (error: Response) => {
+          console.log('Error initial data!! -> ' + error);
+          this.serviceIsValid = true;
+        }
       );
   }
 
   Add() {
-
-    
-    console.log(this.unitArray.length);
+    const arrlen = this.unitArray.length;
     const unit: string = this.unit.nativeElement.value;
-    if ( unit.trim() !== '') {
-      let checkDuplicate: number;
-      this.unitArray.forEach( (checkdup) => {
-        checkDuplicate = checkdup.unit.indexOf(unit);
-      });
-      // console.log(checkDuplicate);
-      if (checkDuplicate !== -1) {
-        console.log('Item is duplicate!!');
-        this.checkdup = true;
+    if (unit.trim() !== '') {
+      if (arrlen === 0) {
+        this.addfuction(unit);
+        this.unit.nativeElement.value = '';
       } else {
-        this.adminService.OnSaveUnit([{ unit: this.unit.nativeElement.value }])
-        .toPromise()
-        .then(
-          (response: Response) => {
-            console.log(response);
-            this.unitArray.push({ unit: this.unit.nativeElement.value });
-            this.unit.nativeElement.value = '';
-            this.serviceIsValid = false;
-            this.checkdup = false;
-          }
-        )
-        .catch(
-          (error: Response) => {
-            console.log(error);
-            this.serviceIsValid = true;
-          }
-        );
+        let checkDuplicate: number;
+        this.unitArray.forEach((checkdup) => {
+          checkDuplicate = checkdup.unit.indexOf(unit);
+        });
+        if (checkDuplicate !== -1) {
+          console.log('Item is duplicate!!');
+          this.checkdup = true;
+        } else {
+          this.addfuction(unit);
+          this.unit.nativeElement.value = '';
+          this.serviceIsValid = false;
+          this.checkdup = false;
+        }
       }
     } else {
       this.unit.nativeElement.value = '';
     }
   }
 
+  private addfuction(unit: string) {
+    this.adminService.OnSaveUnit([{ unit: unit }])
+      .toPromise()
+      .then(
+        (response: Response) => {
+          console.log(response);
+          this.unitArray.push({ unit: unit });
+        }
+      )
+      .catch(
+        (error: Response) => {
+          console.log(error);
+          this.serviceIsValid = !this.serviceIsValid;
+        }
+      );
+  }
+
   deleteitem(index: number) {
     const _unit = this.unitArray[index].unit;
-    this.adminService.OnDelUnit([{ unit: _unit}])
-    .toPromise()
-    .then(
-      (response: Response) => {
-        console.log(response);
-        this.unitArray.splice(index, 1);
-      }
-    )
-    .catch(
-      (error: Response) => {
-        console.log(error);
-      }
-    );
-    // this.unitArray.splice(index, 1);
-    // this.adminService.OnSaveUnit(this.unitArray);
+    this.adminService.OnDelUnit([{ unit: _unit }])
+      .toPromise()
+      .then(
+        (response: Response) => {
+          console.log(response);
+          this.unitArray.splice(index, 1);
+        }
+      )
+      .catch(
+        (error: Response) => {
+          console.log(error);
+        }
+      );
   }
 }
