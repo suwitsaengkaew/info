@@ -3,14 +3,15 @@
   <div class="panel-body">
     <div *ngFor="let unit of unitArray; let i = index;">
       <div class="forminput">
-        <button class="btn btn-danger" (click)="deleteitem(i)">-</button> {{i+1}} - {{ unit.unit }}
+        <button class="btn btn-danger" (click)="deleteitem(i)">-</button> {{i+1}} - {{ unit.UNIT_NAME }}
       </div>
     </div>
     <div class="form-inline">
-      <input #unit id="unit" type="text" class="form-control" placeholder="Unit Name">
+      <input #unit id="unit" type="text" class="form-control" placeholder="Unit Name" (keyup)="clear()">
       <button id="addbtn" [disabled]="!unit.value" class="btn btn-primary" type="button" (click)="Add(unit.value)">Add</button>
       <p *ngIf="serviceIsValid" style="color: red;">!!! Web Service problem. Please contact administrator !!!</p>
       <p *ngIf="checkdup" style="color: red;">!!! Data input is duplicate !!!</p>
+      <p *ngIf="checkdb" style="color: red;">!!! Error -> {{ errormsg }}</p>
     </div>
   </div>
 </div>

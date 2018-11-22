@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { Response } from '@angular/http';
+// import { Response } from '@angular/http';
 import { AdminService } from '../admin.service';
 import { UnitsModel } from '../../master/model/pr.model';
 @Component({
@@ -9,6 +9,8 @@ import { UnitsModel } from '../../master/model/pr.model';
 })
 export class UnitComponent implements OnInit {
   title = 'Unit Register';
+  errormsg: string;
+  checkdb = false;
   serviceIsValid = false;
   checkdup = false;
   @ViewChild('unit') unit: ElementRef;
@@ -19,10 +21,13 @@ export class UnitComponent implements OnInit {
     this.adminService.OnGetUnit()
       .toPromise()
       .then(
-        (res: Response) => this.unitArray = res.json()
+        (res: UnitsModel[]) => {
+          console.log(res);
+          this.unitArray = res;
+        }
       )
       .catch(
-        (error: Response) => {
+        (error) => {
           console.log('Error initial data!! -> ' + error);
           this.serviceIsValid = true;
         }
@@ -39,7 +44,7 @@ export class UnitComponent implements OnInit {
       } else {
         let checkDuplicate: number;
         this.unitArray.forEach((checkdup) => {
-          checkDuplicate = checkdup.unit.indexOf(unit);
+          checkDuplicate = checkdup.UNIT_NAME.indexOf(unit);
         });
         if (checkDuplicate !== -1) {
           console.log('Item is duplicate!!');
@@ -57,25 +62,48 @@ export class UnitComponent implements OnInit {
   }
 
   private addfuction(unit: string) {
-    this.adminService.OnSaveUnit([{ unit: unit }])
-      .toPromise()
-      .then(
-        (response: Response) => {
+    console.log(unit);
+    // this.adminService.OnSaveUnit({ UNIT_NAME: unit })
+    //   .subscribe(
+    //     (response: Response) => {
+    //       const resmeg = JSON.parse(response.text())[0];
+    //       if (resmeg.error === 'error') {
+    //         console.log(resmeg.text);
+    //         this.errormsg = resmeg.text;
+    //         this.checkdb = true;
+    //       } else {
+    //         console.log(response);
+    //         this.unitArray.push({ UNIT_NAME: unit });
+    //       }
+    //     }
+    //   );
+    this.adminService.OnPostUnit({ UNIT_NAME: unit })
+    .toPromise()
+    .then(
+      (response) => {
+        console.log(response);
+        const resmeg = response[0];
+        if (resmeg.notice === 'error') {
+          console.log(resmeg.text);
+          this.errormsg = resmeg.text;
+          this.checkdb = true;
+        } else {
           console.log(response);
-          this.unitArray.push({ unit: unit });
+          this.unitArray.push({ UNIT_NAME: unit });
         }
-      )
-      .catch(
-        (error: Response) => {
-          console.log(error);
-          this.serviceIsValid = !this.serviceIsValid;
-        }
-      );
+      }
+    )
+    .catch(
+      (error) => {
+        console.log(error);
+        this.serviceIsValid = !this.serviceIsValid;
+      }
+    );
   }
 
   deleteitem(index: number) {
-    const _unit = this.unitArray[index].unit;
-    this.adminService.OnDelUnit([{ unit: _unit }])
+    const _unit = this.unitArray[index].UNIT_NAME;
+    this.adminService.OnDelUnit([{ UNIT_NAME: _unit }])
       .toPromise()
       .then(
         (response: Response) => {
@@ -88,5 +116,11 @@ export class UnitComponent implements OnInit {
           console.log(error);
         }
       );
+  }
+
+  clear() {
+    this.checkdb = false;
+    this.serviceIsValid = false;
+    this.checkdup = false;
   }
 }
