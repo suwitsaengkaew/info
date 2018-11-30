@@ -58,6 +58,7 @@ export class CurrenciesModel {
 
 export class UnitsModel {
     constructor (
+        public STD_ID: number,
         public UNIT_NAME: string
     ) {}
 }

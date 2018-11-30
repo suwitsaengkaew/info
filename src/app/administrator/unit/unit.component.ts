@@ -18,7 +18,7 @@ export class UnitComponent implements OnInit {
   constructor(private adminService: AdminService) { }
 
   ngOnInit() {
-    this.adminService.OnGetUnit()
+    this.adminService.OnGetUnit(0)
       .toPromise()
       .then(
         (res: UnitsModel[]) => {
@@ -62,35 +62,15 @@ export class UnitComponent implements OnInit {
   }
 
   private addfuction(unit: string) {
-    console.log(unit);
-    // this.adminService.OnSaveUnit({ UNIT_NAME: unit })
-    //   .subscribe(
-    //     (response: Response) => {
-    //       const resmeg = JSON.parse(response.text())[0];
-    //       if (resmeg.error === 'error') {
-    //         console.log(resmeg.text);
-    //         this.errormsg = resmeg.text;
-    //         this.checkdb = true;
-    //       } else {
-    //         console.log(response);
-    //         this.unitArray.push({ UNIT_NAME: unit });
-    //       }
-    //     }
-    //   );
-    this.adminService.OnPostUnit({ UNIT_NAME: unit })
+    this.adminService.OnPostUnit({ STD_ID: 0, UNIT_NAME: unit })
     .toPromise()
     .then(
       (response) => {
         console.log(response);
-        const resmeg = response[0];
-        if (resmeg.notice === 'error') {
-          console.log(resmeg.text);
-          this.errormsg = resmeg.text;
-          this.checkdb = true;
-        } else {
-          console.log(response);
-          this.unitArray.push({ UNIT_NAME: unit });
-        }
+        this.unitArray.push({ STD_ID: 0, UNIT_NAME: unit });
+      },
+      (error) => {
+        console.log(error);
       }
     )
     .catch(
@@ -103,7 +83,8 @@ export class UnitComponent implements OnInit {
 
   deleteitem(index: number) {
     const _unit = this.unitArray[index].UNIT_NAME;
-    this.adminService.OnDelUnit([{ UNIT_NAME: _unit }])
+    console.log(_unit);
+    this.adminService.OnDelUnit(_unit)
       .toPromise()
       .then(
         (response: Response) => {
