@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Response } from '@angular/http';
 import { AdminService } from '../admin.service';
-import { SuppliersModel } from '../../master/model/pr.model';
+import { UnitsModel } from '../../master/model/pr.model';
 
 @Component({
   selector: 'app-suppliers',
@@ -13,14 +13,17 @@ export class SuppliersComponent implements OnInit {
   serviceIsValid = false;
   checkdup = false;
   @ViewChild('sup') sup: ElementRef;
-  supArray: SuppliersModel[] = [];
+  supArray: UnitsModel[] = [];
   constructor(private adminService: AdminService) { }
 
   ngOnInit() {
-    this.adminService.OnGetSuppliers()
+    this.adminService.OnGetUnit(1)
       .toPromise()
       .then(
-        (res: Response) => this.supArray = res.json()
+        (res: UnitsModel[]) => {
+          console.log(res);
+          this.supArray = res;
+        }
       )
       .catch(
         (error: Response) => {
@@ -40,7 +43,7 @@ export class SuppliersComponent implements OnInit {
       } else {
         let checkDuplicate: number;
         this.supArray.forEach((checkdup) => {
-          checkDuplicate = checkdup.sp.indexOf(sup);
+          checkDuplicate = checkdup.UNIT_NAME.indexOf(sup);
         });
         if (checkDuplicate !== -1) {
           console.log('Item is duplicate!!');
@@ -58,12 +61,12 @@ export class SuppliersComponent implements OnInit {
   }
 
   private addfuction(sup: string) {
-    this.adminService.OnSaveSuppliers([{ sp: sup }])
+    this.adminService.OnPostUnit({ STD_ID: 1, UNIT_NAME: sup })
       .toPromise()
       .then(
         (response: Response) => {
           console.log(response);
-          this.supArray.push({ sp: sup });
+          this.supArray.push({ STD_ID: 1, UNIT_NAME: sup });
         }
       )
       .catch(
@@ -75,8 +78,8 @@ export class SuppliersComponent implements OnInit {
   }
 
   deleteitem(index: number) {
-    const _sup = this.supArray[index].sp;
-    this.adminService.OnDelSuppliers([{ sp: _sup }])
+    const _sup = this.supArray[index].UNIT_NAME;
+    this.adminService.OnDelUnit(_sup)
       .toPromise()
       .then(
         (response: Response) => {

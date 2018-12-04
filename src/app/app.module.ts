@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AuthService } from './auth/auth.service';
 import { AdminService } from './administrator/admin.service';
+import { PrRecordService } from './pr-record/pr-record.service';
 
 import { AppComponent } from './app.component';
 import { SigninComponent } from './auth/signin/signin.component';
@@ -43,7 +44,7 @@ import { PrtypeComponent } from './administrator/prtype/prtype.component';
     ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [AuthService, AdminService],
+  providers: [AuthService, AdminService, PrRecordService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

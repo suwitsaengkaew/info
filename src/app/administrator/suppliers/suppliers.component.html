@@ -3,7 +3,7 @@
   <div class="panel-body">
     <div *ngFor="let sup of supArray; let i = index;">
       <div class="forminput">
-        <button class="btn btn-danger" (click)="deleteitem(i)">-</button> {{i+1}} - {{ sup.sp }}
+        <button class="btn btn-danger" (click)="deleteitem(i)">-</button> {{i+1}} - {{ sup.UNIT_NAME }}
       </div>
     </div>
     <div class="form-inline">

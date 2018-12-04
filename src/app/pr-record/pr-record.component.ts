@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
+import { PrRecordService } from './pr-record.service';
+import { UnitsModel } from '../master/model/pr.model';
 
 @Component({
   selector: 'app-pr-record',
@@ -8,14 +10,42 @@ import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 })
 export class PrRecordComponent implements OnInit {
 
-  constructor() { }
+  constructor(private prRecordService: PrRecordService) { }
   prrecordForm: FormGroup;
+
+  Units: UnitsModel[] = [];
+  Suppliers: UnitsModel[] = [];
+  Requests: UnitsModel[] = [];
+  PrTypes: UnitsModel[] = [];
+  Plants: UnitsModel[] = [];
+  Currencies: UnitsModel[] = [];
+
+
+  UnitGroup = [this.Units, this.Suppliers, this.Requests, this.PrTypes, this.Plants, this.Currencies];
 
   ngOnInit() {
     this.onInitForm();
   }
 
   private onInitForm() {
+
+    for (let i = 0; i < 6; i++) {
+
+      this.prRecordService.OnGetUnit(i)
+        .toPromise()
+        .then(
+          (res: UnitsModel[]) => {
+            console.log(res);
+            console.log(this.UnitGroup[i]);
+            this.UnitGroup[i] = res;
+          }
+        )
+        .catch(
+          (error) => {
+            console.log('Error initial data!! -> ' + error);
+          }
+        );
+    }
     const pr_type = '';
     const pr_plant = '';
     const pr_profitCenter = '';
@@ -47,7 +77,7 @@ export class PrRecordComponent implements OnInit {
 
   addDetail() {
     (<FormArray>this.prrecordForm.get('pr_detail')).push(
-      new FormGroup ({
+      new FormGroup({
         'pr_desc': new FormControl(null, Validators.required),
         'pr_remark': new FormControl(null),
         'pr_qty': new FormControl(null, [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)]),

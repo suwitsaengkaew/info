@@ -3,7 +3,7 @@
   <div class="panel-body">
     <div *ngFor="let pr of prTypeArray; let i = index;">
       <div class="forminput">
-        <button class="btn btn-danger" (click)="deleteitem(i)">-</button> {{i+1}} - {{ pr.prtype }}
+        <button class="btn btn-danger" (click)="deleteitem(i)">-</button> {{i+1}} - {{ pr.UNIT_NAME }}
       </div>
     </div>
     <div class="form-inline">

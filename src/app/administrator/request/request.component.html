@@ -1,9 +1,9 @@
 <div class="panel panel-primary">
   <div class="panel-heading">{{ title }}</div>
   <div class="panel-body">
-    <div *ngFor="let req of reqArray; let i = index;">
+    <div *ngFor="let req of unitArray; let i = index;">
       <div class="forminput">
-        <button class="btn btn-danger" (click)="deleteitem(i)">-</button> {{i+1}} - {{ req.requestName }}
+        <button class="btn btn-danger" (click)="deleteitem(i)">-</button> {{i+1}} - {{ req.UNIT_NAME }}
       </div>
     </div>
     <div class="form-inline">

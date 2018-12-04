@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Response } from '@angular/http';
 import { AdminService } from '../admin.service';
-import { PlantModel } from '../../master/model/pr.model';
+import { UnitsModel } from '../../master/model/pr.model';
 
 @Component({
   selector: 'app-plant',
@@ -13,14 +13,17 @@ export class PlantComponent implements OnInit {
   serviceIsValid = false;
   checkdup = false;
   @ViewChild('plant') plant: ElementRef;
-  plantArray: PlantModel[] = [];
+  plantArray: UnitsModel[] = [];
   constructor(private adminService: AdminService) { }
 
   ngOnInit() {
-    this.adminService.OnGetPlant()
+    this.adminService.OnGetUnit(4)
       .toPromise()
       .then(
-        (res: Response) => this.plantArray = res.json()
+        (res: UnitsModel[]) => {
+          console.log(res);
+          this.plantArray = res;
+        }
       )
       .catch(
         (error: Response) => {
@@ -40,7 +43,7 @@ export class PlantComponent implements OnInit {
       } else {
         let checkDuplicate: number;
         this.plantArray.forEach((checkdup) => {
-          checkDuplicate = checkdup.plantName.indexOf(plant);
+          checkDuplicate = checkdup.UNIT_NAME.indexOf(plant);
         });
         if (checkDuplicate !== -1) {
           console.log('Item is duplicate!!');
@@ -58,12 +61,12 @@ export class PlantComponent implements OnInit {
   }
 
   private addfuction(plant: string) {
-    this.adminService.OnSavePlant([{ plantName: plant }])
+    this.adminService.OnPostUnit({ STD_ID: 4, UNIT_NAME: plant })
       .toPromise()
       .then(
         (response: Response) => {
           console.log(response);
-          this.plantArray.push({ plantName: plant });
+          this.plantArray.push({ STD_ID: 4, UNIT_NAME: plant });
         }
       )
       .catch(
@@ -75,8 +78,8 @@ export class PlantComponent implements OnInit {
   }
 
   deleteitem(index: number) {
-    const _plant = this.plantArray[index].plantName;
-    this.adminService.OnDelPlant([{ plantName: _plant }])
+    const _plant = this.plantArray[index].UNIT_NAME;
+    this.adminService.OnDelUnit(_plant)
       .toPromise()
       .then(
         (response: Response) => {

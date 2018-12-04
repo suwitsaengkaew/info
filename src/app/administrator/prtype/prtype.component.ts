@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Response } from '@angular/http';
 import { AdminService } from '../admin.service';
-import { PrTypeModel } from '../../master/model/pr.model';
+import { UnitsModel } from '../../master/model/pr.model';
 
 @Component({
   selector: 'app-prtype',
@@ -13,14 +13,17 @@ export class PrtypeComponent implements OnInit {
   serviceIsValid = false;
   checkdup = false;
   @ViewChild('pr') pr: ElementRef;
-  prTypeArray: PrTypeModel[] = [];
+  prTypeArray: UnitsModel[] = [];
   constructor(private adminService: AdminService) { }
 
   ngOnInit() {
-    this.adminService.OnGetPrType()
+    this.adminService.OnGetUnit(3)
       .toPromise()
       .then(
-        (res: Response) => this.prTypeArray = res.json()
+        (res: UnitsModel[]) => {
+          console.log(res);
+          this.prTypeArray = res;
+        }
       )
       .catch(
         (error: Response) => {
@@ -40,7 +43,7 @@ export class PrtypeComponent implements OnInit {
       } else {
         let checkDuplicate: number;
         this.prTypeArray.forEach((checkdup) => {
-          checkDuplicate = checkdup.prtype.indexOf(pr);
+          checkDuplicate = checkdup.UNIT_NAME.indexOf(pr);
         });
         if (checkDuplicate !== -1) {
           console.log('Item is duplicate!!');
@@ -58,12 +61,12 @@ export class PrtypeComponent implements OnInit {
   }
 
   private addfuction(pr: string) {
-    this.adminService.OnSavePrType([{ prtype: pr }])
+    this.adminService.OnPostUnit({ STD_ID: 3, UNIT_NAME: pr })
       .toPromise()
       .then(
         (response: Response) => {
           console.log(response);
-          this.prTypeArray.push({ prtype: pr });
+          this.prTypeArray.push({ STD_ID: 3, UNIT_NAME: pr });
         }
       )
       .catch(
@@ -75,8 +78,8 @@ export class PrtypeComponent implements OnInit {
   }
 
   deleteitem(index: number) {
-    const _pr = this.prTypeArray[index].prtype;
-    this.adminService.OnDelPrType([{ prtype: _pr }])
+    const _pr = this.prTypeArray[index].UNIT_NAME;
+    this.adminService.OnDelUnit(_pr)
       .toPromise()
       .then(
         (response: Response) => {

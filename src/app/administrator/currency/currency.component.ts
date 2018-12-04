@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Response } from '@angular/http';
 import { AdminService } from '../admin.service';
-import { CurrenciesModel } from '../../master/model/pr.model';
+import { UnitsModel } from '../../master/model/pr.model';
 
 @Component({
   selector: 'app-currency',
@@ -13,14 +13,17 @@ export class CurrencyComponent implements OnInit {
   serviceIsValid = false;
   checkdup = false;
   @ViewChild('curr') curr: ElementRef;
-  currArray: CurrenciesModel[] = [];
+  currArray: UnitsModel[] = [];
   constructor(private adminService: AdminService) { }
 
   ngOnInit() {
-    this.adminService.OnGetCurrency()
+    this.adminService.OnGetUnit(5)
       .toPromise()
       .then(
-        (res: Response) => this.currArray = res.json()
+        (res: UnitsModel[]) => {
+          console.log(res);
+          this.currArray = res;
+        }
       )
       .catch(
         (error: Response) => {
@@ -40,7 +43,7 @@ export class CurrencyComponent implements OnInit {
       } else {
         let checkDuplicate: number;
         this.currArray.forEach((checkdup) => {
-          checkDuplicate = checkdup.curr.indexOf(curr);
+          checkDuplicate = checkdup.UNIT_NAME.indexOf(curr);
         });
         if (checkDuplicate !== -1) {
           console.log('Item is duplicate!!');
@@ -58,12 +61,12 @@ export class CurrencyComponent implements OnInit {
   }
 
   private addfuction(curr: string) {
-    this.adminService.OnSaveCurrency([{ curr: curr }])
+    this.adminService.OnPostUnit({ STD_ID: 5, UNIT_NAME: curr })
       .toPromise()
       .then(
         (response: Response) => {
           console.log(response);
-          this.currArray.push({ curr: curr });
+          this.currArray.push({ STD_ID: 5, UNIT_NAME: curr });
         }
       )
       .catch(
@@ -75,8 +78,8 @@ export class CurrencyComponent implements OnInit {
   }
 
   deleteitem(index: number) {
-    const _curr = this.currArray[index].curr;
-    this.adminService.OnDelCurrency([{ curr: _curr }])
+    const _curr = this.currArray[index].UNIT_NAME;
+    this.adminService.OnDelUnit(_curr)
       .toPromise()
       .then(
         (response: Response) => {

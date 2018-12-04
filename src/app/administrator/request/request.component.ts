@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Response } from '@angular/http';
 import { AdminService } from '../admin.service';
-import { RequestbyModel } from '../../master/model/pr.model';
+import { UnitsModel } from '../../master/model/pr.model';
 @Component({
   selector: 'app-request',
   templateUrl: './request.component.html',
@@ -12,14 +12,17 @@ export class RequestComponent implements OnInit {
   serviceIsValid = false;
   checkdup = false;
   @ViewChild('req') req: ElementRef;
-  reqArray: RequestbyModel[] = [];
+  unitArray: UnitsModel[] = [];
   constructor(private adminService: AdminService) { }
 
   ngOnInit() {
-    this.adminService.OnGetRequest()
+    this.adminService.OnGetUnit(2)
       .toPromise()
       .then(
-        (res: Response) => this.reqArray = res.json()
+        (res: UnitsModel[]) => {
+          console.log(res);
+          this.unitArray = res;
+        }
       )
       .catch(
         (error: Response) => {
@@ -30,7 +33,7 @@ export class RequestComponent implements OnInit {
   }
 
   Add() {
-    const arrlen = this.reqArray.length;
+    const arrlen = this.unitArray.length;
     const req: string = this.req.nativeElement.value;
     if (req.trim() !== '') {
       if (arrlen === 0) {
@@ -38,8 +41,8 @@ export class RequestComponent implements OnInit {
         this.req.nativeElement.value = '';
       } else {
         let checkDuplicate: number;
-        this.reqArray.forEach((checkdup) => {
-          checkDuplicate = checkdup.requestName.indexOf(req);
+        this.unitArray.forEach((checkdup) => {
+          checkDuplicate = checkdup.UNIT_NAME.indexOf(req);
         });
         if (checkDuplicate !== -1) {
           console.log('Item is duplicate!!');
@@ -57,12 +60,12 @@ export class RequestComponent implements OnInit {
   }
 
   private addfuction(req: string) {
-    this.adminService.OnSaveRequest([{ requestName: req }])
+    this.adminService.OnPostUnit({ STD_ID: 2, UNIT_NAME: req })
       .toPromise()
       .then(
         (response: Response) => {
           console.log(response);
-          this.reqArray.push({ requestName: req });
+          this.unitArray.push({ STD_ID: 2, UNIT_NAME: req });
         }
       )
       .catch(
@@ -74,13 +77,13 @@ export class RequestComponent implements OnInit {
   }
 
   deleteitem(index: number) {
-    const _req = this.reqArray[index].requestName;
-    this.adminService.OnDelRequest([{ requestName: _req }])
+    const _req = this.unitArray[index].UNIT_NAME;
+    this.adminService.OnDelUnit(_req)
       .toPromise()
       .then(
         (response: Response) => {
           console.log(response);
-          this.reqArray.splice(index, 1);
+          this.unitArray.splice(index, 1);
         }
       )
       .catch(

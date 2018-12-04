@@ -1,12 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { UnitsModel,
-    PrTypeModel,
-    RequestbyModel
- } from '../master/model/pr.model';
-// import { Observable } from 'rxjs/Observable';
-// import { map } from 'rxjs/Operator/map';
-
+import { UnitsModel } from '../master/model/pr.model';
 
 const httpOptions = {
     headers: new HttpHeaders({

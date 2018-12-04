@@ -130,7 +130,7 @@
                   </span>
                   <select #unit class="form-control input-sm" aria-describedby="basic-unit" id="unit" style="width: 80px;"
                     tabindex="13" formControlName="pr_unit">
-                    <option></option>
+                    <option *ngFor="let unit of Units">{{ unit.UNIT_NAME }}</option>
                   </select>
                 </div>
 

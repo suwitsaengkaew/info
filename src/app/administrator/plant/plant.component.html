@@ -3,7 +3,7 @@
   <div class="panel-body">
     <div *ngFor="let plant of plantArray; let i = index;">
       <div class="forminput">
-        <button class="btn btn-danger" (click)="deleteitem(i)">-</button> {{i+1}} - {{ plant.plantName }}
+        <button class="btn btn-danger" (click)="deleteitem(i)">-</button> {{i+1}} - {{ plant.UNIT_NAME }}
       </div>
     </div>
     <div class="form-inline">
