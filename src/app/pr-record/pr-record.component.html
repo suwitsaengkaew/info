@@ -11,14 +11,14 @@
               <span class="input-group-addon" id="basic-prtype">PR Type :</span>
               <select #prtype class="form-control input-sm" aria-describedby="basic-prtype" id="prtype"
                 tabindex="1" formControlName="pr_type">
-                <option></option>
+                <option *ngFor="let type of PrTypes">{{ type.UNIT_NAME }}</option>
               </select>
             </div>
             <div class="input-group" style="margin-top: 5px;">
               <span class="input-group-addon" id="basic-plant">PR Plant :</span>
               <select #plant class="form-control input-sm" aria-describedby="basic-plant" id="plant"
                 tabindex="2" formControlName="pr_plant">
-                <option value=""></option>
+                <option *ngFor="let plnat of Plants">{{ plant.UNIT_NAME }}</option>
               </select>
             </div>
 
@@ -36,7 +36,7 @@
                 By :</span>
               <select #requestby class="form-control input-sm" aria-describedby="basic-requestby" id="requestby"
                 tabindex="5" formControlName="pr_requestby">
-                <option value=""></option>
+                <option *ngFor="let req of Requests">{{ req.UNIT_NAME }}</option>
               </select>
             </div>
 
@@ -59,7 +59,7 @@
                 :</span>
               <select #suppliername class="form-control input-sm" aria-describedby="basic-suppliername" id="suppliername"
                 tabindex="10" formControlName="pr_supplier">
-                <option></option>
+                <option *ngFor="let supplier of Suppliers">{{ supplier.UNIT_NAME }}</option>
               </select>
             </div>
 
@@ -149,7 +149,7 @@
                     :</span>
                   <select #currency class="form-control input-sm" aria-describedby="basic-curr" id="curr" style="width: 80px;"
                     tabindex="15" formControlName="pr_curr">
-                    <option></option>
+                    <option *ngFor="let curr of Currencies">{{ curr.UNIT_NAME }}</option>
                   </select>
                   
                 </div>

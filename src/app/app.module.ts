@@ -20,6 +20,7 @@ import { CurrencyComponent } from './administrator/currency/currency.component';
 import { PlantComponent } from './administrator/plant/plant.component';
 import { RequestComponent } from './administrator/request/request.component';
 import { PrtypeComponent } from './administrator/prtype/prtype.component';
+import { UseradminComponent } from './auth/useradmin/useradmin.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { PrtypeComponent } from './administrator/prtype/prtype.component';
     CurrencyComponent,
     PlantComponent,
     RequestComponent,
-    PrtypeComponent
+    PrtypeComponent,
+    UseradminComponent
   ],
   imports: [
     BrowserModule,

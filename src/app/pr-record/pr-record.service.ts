@@ -12,8 +12,8 @@ const httpOptions = {
 export class PrRecordService {
     constructor(private http: HttpClient) {}
 
-    OnGetUnit(stdId: number) {
-        return this.http.get('http://intra.ytmt.co.th:4000/unitstd/' + stdId);
+    OnGetUnit() {
+        return this.http.get('http://intra.ytmt.co.th:4000/unitstd');
     }
 
     OnPostPrRecord(pr_input: PrinputdataModel) {

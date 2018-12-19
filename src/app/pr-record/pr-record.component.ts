@@ -20,32 +20,45 @@ export class PrRecordComponent implements OnInit {
   Plants: UnitsModel[] = [];
   Currencies: UnitsModel[] = [];
 
-
-  UnitGroup = [this.Units, this.Suppliers, this.Requests, this.PrTypes, this.Plants, this.Currencies];
-
   ngOnInit() {
     this.onInitForm();
   }
 
   private onInitForm() {
 
-    for (let i = 0; i < 6; i++) {
+    this.prRecordService.OnGetUnit()
+      .toPromise()
+      .then(
+        (res: UnitsModel[]) => {
+          res.filter((r) => {
+            switch (r.STD_ID) {
+              case 0:
+                this.Units.push(r);
+                break;
+              case 1:
+                this.Suppliers.push(r);
+                break;
+              case 2:
+                this.Requests.push(r);
+                break;
+              case 3:
+                this.PrTypes.push(r);
+                break;
+              case 4:
+                this.Plants.push(r);
+                break;
+              case 5:
+                this.Currencies.push(r);
+                break;
+            }
+          });
+      })
+      .catch(
+        (error) => {
+          console.log('Error initial data!! -> ' + JSON.stringify(error));
+        }
+      );
 
-      this.prRecordService.OnGetUnit(i)
-        .toPromise()
-        .then(
-          (res: UnitsModel[]) => {
-            console.log(res);
-            console.log(this.UnitGroup[i]);
-            this.UnitGroup[i] = res;
-          }
-        )
-        .catch(
-          (error) => {
-            console.log('Error initial data!! -> ' + error);
-          }
-        );
-    }
     const pr_type = '';
     const pr_plant = '';
     const pr_profitCenter = '';

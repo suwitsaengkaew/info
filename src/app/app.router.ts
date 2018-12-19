@@ -5,6 +5,7 @@ import { SigninComponent } from './auth/signin/signin.component';
 import { MainpageinfoComponent } from './mainpageinfo/mainpageinfo.component';
 import { PrRecordComponent } from './pr-record/pr-record.component';
 import { AdministratorComponent } from './administrator/administrator.component';
+import { UseradminComponent } from './auth/useradmin/useradmin.component';
 
 
 const appRoutes: Routes = [
@@ -12,7 +13,8 @@ const appRoutes: Routes = [
     { path: 'signin', component: SigninComponent },
     { path: 'mainpage', component: MainpageinfoComponent },
     { path: 'prrecord', component: PrRecordComponent },
-    { path: 'admin', component: AdministratorComponent},
+    { path: 'admin', component: AdministratorComponent },
+    { path: 'useradmin', component: UseradminComponent }
 ];
 
 @NgModule({
