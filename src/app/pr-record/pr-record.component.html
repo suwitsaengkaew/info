@@ -9,21 +9,21 @@
 
             <div class="input-group" style="margin-top: 5px;">
               <span class="input-group-addon" id="basic-prtype">PR Type :</span>
-              <select #prtype class="form-control input-sm" aria-describedby="basic-prtype" id="prtype"
-                tabindex="1" formControlName="pr_type">
+              <select #prtype class="form-control input-sm" aria-describedby="basic-prtype" id="prtype" tabindex="1"
+                formControlName="pr_type">
                 <option *ngFor="let type of PrTypes">{{ type.UNIT_NAME }}</option>
               </select>
             </div>
             <div class="input-group" style="margin-top: 5px;">
               <span class="input-group-addon" id="basic-plant">PR Plant :</span>
-              <select #plant class="form-control input-sm" aria-describedby="basic-plant" id="plant"
-                tabindex="2" formControlName="pr_plant">
-                <option *ngFor="let plnat of Plants">{{ plant.UNIT_NAME }}</option>
+              <select #plant class="form-control input-sm" aria-describedby="basic-plant" id="plant" tabindex="2"
+                formControlName="pr_plant">
+                <option *ngFor="let plant of Plants">{{ plant.UNIT_NAME }}</option>
               </select>
             </div>
 
             <div class="input-group" style="margin-top: 5px;">
-              <span class="input-group-addon"id="basic-profitcenter">ProfitCenter
+              <span class="input-group-addon" id="basic-profitcenter">ProfitCenter
                 :</span>
               <select #profit class="form-control input-sm" aria-describedby="basic-profitcenter" id="profitcenter"
                 tabindex="4" formControlName="pr_profitCenter">
@@ -50,8 +50,8 @@
             <div class="input-group" style="margin-top: 5px;">
               <span class="input-group-addon" id="basic-prnumber">PR No.
                 :</span>
-              <input #prnumber id="prnumber" type="text" class="form-control input-sm"
-                aria-describedby="basic-prnumber" tabindex="6" formControlName="pr_no">
+              <input #prnumber id="prnumber" type="text" class="form-control input-sm" aria-describedby="basic-prnumber"
+                tabindex="6" formControlName="pr_no">
             </div>
 
             <div class="input-group" style="margin-top: 5px;">
@@ -66,22 +66,22 @@
             <div class="input-group" style="margin-top: 5px;">
               <span class="input-group-addon" id="basic-prdate">PR Date:
               </span>
-              <input #prdate id="prdate" type="date" class="form-control input-sm"
-                aria-describedby="basic-prdate" tabindex="7" formControlName="pr_date">
+              <input #prdate id="prdate" type="date" class="form-control input-sm" aria-describedby="basic-prdate"
+                tabindex="7" formControlName="pr_date">
             </div>
 
             <div class="input-group" style="margin-top: 5px;">
               <span class="input-group-addon" id="basic-prinvnumber">Inv No:</span>
-              <input #invnumber id="prinvnumber" type="text" class="form-control input-sm"
-                aria-describedby="basic-prinvnumber" tabindex="9" formControlName="pr_invno">
+              <input #invnumber id="prinvnumber" type="text" class="form-control input-sm" aria-describedby="basic-prinvnumber"
+                tabindex="9" formControlName="pr_invno">
             </div>
 
             <!-- Dlv Date -->
             <div class="input-group" style="margin-top: 5px;">
               <span class="input-group-addon" id="basic-dlvdate">Dlv Date :
               </span>
-              <input #dlvdate class="form-control input-sm" id="dlvdate" type="date"
-                aria-describedby="basic-dlvdate" tabindex="8" formControlName="pr_duedate">
+              <input #dlvdate class="form-control input-sm" id="dlvdate" type="date" aria-describedby="basic-dlvdate"
+                tabindex="8" formControlName="pr_duedate">
             </div>
             <!-- Dlv Date -->
 
@@ -90,12 +90,14 @@
           <div class="item-container">
             <div class="button-container">
               <!-- button-container -->
-              <label class="btn btn-default" for="butplus">Increase item -> <button id="butplus" class="btn btn-primary" (click)="addDetail()">+</button> </label>
-              
+              <label class="btn btn-default" for="butplus">Increase item -> <button id="butplus" class="btn btn-primary"
+                  (click)="addDetail()">+</button> </label>
+
             </div> <!-- button-container -->
 
             <div formArrayName="pr_detail">
-              <div class="container-detail" *ngFor="let pr_detailCtrl of prrecordForm.get('pr_detail').controls; let i = index" [formGroupName]="i">
+              <div class="container-detail" *ngFor="let pr_detailCtrl of prrecordForm.get('pr_detail').controls; let i = index"
+                [formGroupName]="i">
                 <!-- Description -->
                 <!-- <input #desc id="desc" class="form-control input-sm" type="text" style="width: 200px;"
                     aria-describedby="basic-desc" tabindex="11" placeholder="Description"> -->
@@ -151,12 +153,12 @@
                     tabindex="15" formControlName="pr_curr">
                     <option *ngFor="let curr of Currencies">{{ curr.UNIT_NAME }}</option>
                   </select>
-                  
+
                 </div>
                 <div>
-                  <button id="butplus" class="btn btn-danger input-sm" (click)="addDetail()">-</button>
+                  <button id="butminus" class="btn btn-danger input-sm" (click)="minusDetail(i)">-</button>
                 </div>
-                
+
               </div>
             </div>
           </div>

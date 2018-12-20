@@ -101,4 +101,7 @@ export class PrRecordComponent implements OnInit {
     );
   }
 
+  minusDetail(index: number) {
+    (<FormArray>this.prrecordForm.get('pr_detail')).removeAt(index);
+  }
 }
