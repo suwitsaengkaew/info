@@ -13,19 +13,19 @@ export class PrRecordComponent implements OnInit {
   constructor(private prRecordService: PrRecordService) { }
   prrecordForm: FormGroup;
 
-  Units: UnitsModel[] = [];
-  Suppliers: UnitsModel[] = [];
-  Requests: UnitsModel[] = [];
-  PrTypes: UnitsModel[] = [];
-  Plants: UnitsModel[] = [];
-  Currencies: UnitsModel[] = [];
+  Units: UnitsModel[] = [{STD_ID: 0, UNIT_NAME: 'Please select'}];
+  Suppliers: UnitsModel[] = [{STD_ID: 0, UNIT_NAME: 'Please select'}];
+  Requests: UnitsModel[] = [{STD_ID: 0, UNIT_NAME: 'Please select'}];
+  PrTypes: UnitsModel[] = [{STD_ID: 0, UNIT_NAME: 'Please select'}];
+  Plants: UnitsModel[] = [{STD_ID: 0, UNIT_NAME: 'Please select'}];
+  Currencies: UnitsModel[] = [{STD_ID: 0, UNIT_NAME: 'Please select'}];
 
   ngOnInit() {
     this.onInitForm();
+    this.onInitData();
   }
 
-  private onInitForm() {
-
+  private onInitData() {
     this.prRecordService.OnGetUnit()
       .toPromise()
       .then(
@@ -52,19 +52,22 @@ export class PrRecordComponent implements OnInit {
                 break;
             }
           });
-      })
+        })
       .catch(
         (error) => {
           console.log('Error initial data!! -> ' + JSON.stringify(error));
         }
       );
 
-    const pr_type = '';
-    const pr_plant = '';
-    const pr_profitCenter = '';
-    const pr_requestby = '';
+  }
+  private onInitForm() {
+
+    const pr_type = 'Please select';
+    const pr_plant = 'Please select';
+    const pr_profitCenter = 'Please select';
+    const pr_requestby = 'Please select';
     const pr_no = '';
-    const pr_supplier = '';
+    const pr_supplier = 'Please select';
     const pr_date = '';
     const pr_invno = '';
     const pr_duedate = '';
@@ -103,5 +106,9 @@ export class PrRecordComponent implements OnInit {
 
   minusDetail(index: number) {
     (<FormArray>this.prrecordForm.get('pr_detail')).removeAt(index);
+  }
+
+  clearform() {
+    this.onInitForm();
   }
 }

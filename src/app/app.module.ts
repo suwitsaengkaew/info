@@ -21,6 +21,9 @@ import { PlantComponent } from './administrator/plant/plant.component';
 import { RequestComponent } from './administrator/request/request.component';
 import { PrtypeComponent } from './administrator/prtype/prtype.component';
 import { UseradminComponent } from './auth/useradmin/useradmin.component';
+import { QuizadministratorComponent } from './quiz/quizadministrator/quizadministrator.component';
+import { QuizmainpageComponent } from './quiz/quizmainpage/quizmainpage.component';
+import { QuizresultComponent } from './quiz/quizresult/quizresult.component';
 
 
 @NgModule({
@@ -37,7 +40,10 @@ import { UseradminComponent } from './auth/useradmin/useradmin.component';
     PlantComponent,
     RequestComponent,
     PrtypeComponent,
-    UseradminComponent
+    UseradminComponent,
+    QuizadministratorComponent,
+    QuizmainpageComponent,
+    QuizresultComponent
   ],
   imports: [
     BrowserModule,

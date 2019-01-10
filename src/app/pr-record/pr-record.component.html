@@ -90,6 +90,7 @@
           <div class="item-container">
             <div class="button-container">
               <!-- button-container -->
+              <!-- <p>Detail of items</p> -->
               <label class="btn btn-default" for="butplus">Increase item -> <button id="butplus" class="btn btn-primary"
                   (click)="addDetail()">+</button> </label>
 
@@ -163,8 +164,8 @@
             </div>
           </div>
           <div class="event-container">
-            <button id="savebutton" [disabled]="prrecordForm.value" class="btn btn-success">Send to Database</button>
-            <button id="clearbutton" class="btn btn-danger">Clear form</button>
+            <button id="savebutton" [disabled]="prrecordForm.value" class="btn btn-success" (click)="onSubmitpr()">Send to Database</button>
+            <button id="clearbutton" class="btn btn-danger" (click)="clearform()">Clear form</button>
           </div>
         </form>
       </div>
