@@ -26,92 +26,71 @@ export class QuizmainpageComponent implements OnInit {
         { question: 'Quest2', answer: 'Quest2_AnswerC', finalanswer: false },
         { question: 'Quest2', answer: 'Quest2_AnswerD', finalanswer: false }
       ]
+    },
+    {
+      number: 'Quest3',
+      answer: [
+        { question: 'Quest3', answer: 'Quest3_AnswerA', finalanswer: true },
+        { question: 'Quest3', answer: 'Quest3_AnswerB', finalanswer: false },
+        { question: 'Quest3', answer: 'Quest3_AnswerC', finalanswer: false },
+        { question: 'Quest3', answer: 'Quest3_AnswerD', finalanswer: false }
+      ]
     }
   ];
 
-  answer: QuizAnswersModel[] = [];
+  finalanswer: QuizAnswersModel[] = [];
   constructor() { }
 
   ngOnInit() {
+    const randomindex = Math.floor(Math.random() * this.question.length);
+    const randomarray = this.question[randomindex];
+    console.log(randomarray);
   }
 
   onRadioChange(evt: QuizAnswersModel) {
-    const _answer = this.answer;
+    const _answer = this.finalanswer;
     const _question = evt.question;
+    // console.log(_question);
     if (_answer.length === 0) {
       this.pushtoarray(evt);
     } else {
       const arrlen = _answer.length;
-      let checkduplicate: number;
-      _answer.forEach((chkdup) => checkduplicate = chkdup.question.indexOf(evt.question));
-      if (checkduplicate !== -1) {
-        // duplication
-        const _index = _answer.findIndex(item => item.question === evt.question);
-        _answer[_index].answer = evt.answer;
-        _answer[_index].finalanswer = evt.finalanswer;
-        this.answer = _answer;
-        // console.log(_index);
+      let checkduplicate = -1;
+      _answer.forEach((quiz) => {
+        if (_question === quiz.question) {
+          checkduplicate = 0;
+        }
+      });
+
+      console.log(checkduplicate);
+      if (checkduplicate !== -1 ) {
+        // console.log('Duplicated');
+        const _index = _answer.findIndex(item => item.question === _question);
+        this.finalanswer.splice(_index, 1);
+        this.pushtoarray(evt);
       } else {
-        // not duplication
-        // const _index = _answer.findIndex(item => item.question === evt.question);
-        // console.log(_index);
         this.pushtoarray(evt);
       }
-      // for (let i = 0; i < arrlen; i++) {
-      //   _answer[i].question
-      //   if (_answer[i].question === _question) {
-      //     _answer[i].answer = evt.answer;
-      //     _answer[i].finalanswer = evt.finalanswer;
-      //   } else {
-      //     this.pushtoarray(evt);
-      //   }
-      // }
     }
-    // const question = evt[0];
-    // console.log(question);
-    // const arrlen = this.answer.length;
-    // console.log(arrlen);
-    // if (arrlen === 0) {
-    //   this.pushtoarray(evt);
-    // } else {
-    //   for (let i = 0; i < arrlen; i++) {
-    //     console.log(this.answer[i].question);
-    //     if (this.answer[i].question === question) {
-    //       // this.answer[i].question = evt[0];
-    //       this.answer[i].answer = evt[1];
-    //       this.answer[i].finalanswer = evt[2];
-    //     } else {
-    //       console.log(i);
-    //       console.log(evt);
-    //       this.pushtoarray(evt);
-    //     }
-    //   }
-
-      // this.answer.forEach((chkdup) => {
-      // if (chkdup.question !== question) {
-      // this.pushtoarray(evt);
-      // const arrayindex = this.answer.findIndex(item => item.question = question);
-      // this.answer[arrayindex].question = evt[0];
-      // this.answer[arrayindex].answer = evt[1];
-      // this.answer[arrayindex].finalanswer = evt[2];
-      // }
-      // console.log(this.answer.length);
-      // console.log(chkdup);
-      // checkarrayduplicate = chkdup.question.indexOf(question);
-      // console.log(checkarrayduplicate);
-      // });
-
-      // if (checkarrayduplicate !== -1) {
-      //   const arrayindex = this.answer.findIndex(item => item.question = question);
-      //   console.log(arrayindex);
-      // } else {
-      //   this.pushtoarray(evt);
-      // }
-    // }
-    console.log(this.answer);
   }
 
   private pushtoarray(evt) {
-    this.answer.push(evt);
+    this.finalanswer.push(evt);
+  }
+
+  submit() {
+    const numberofquestion = this.question.length;
+    const numberoffinalanswer = this.finalanswer.length;
+    let trueanswer = 0;
+    if (numberofquestion === numberoffinalanswer) {
+      this.finalanswer.forEach(_trueanswer => {
+        if (_trueanswer.finalanswer) {
+          trueanswer += 1;
+        }
+      });
+      alert('คะแนนที่ได้คือ ' + trueanswer + '/' + numberofquestion);
+    } else {
+      alert('ตอบไม่ครบ');
+    }
   }
 }

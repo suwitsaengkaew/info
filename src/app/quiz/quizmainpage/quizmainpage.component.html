@@ -1,15 +1,13 @@
 <div class="panel panel-primary">
-  <div class="panel-heading" >
-    
+  <div class="panel-heading">
+
   </div>
-  <div class="panel-body" *ngFor="let ans of question">
+    <div class="panel-body" *ngFor="let ans of question">
       <p>{{ ans.number }}</p>
-    <div class="panel-container" *ngFor="let a of ans.answer; let i = index">
-        <input type="radio" 
-        [name]="ans.number" 
-        (change)="onRadioChange(ans.answer[i])"
-        > {{ a.answer }} <br>
+      <div class="panel-container" *ngFor="let a of ans.answer; let i = index">
+        <input type="radio" [name]="ans.number" (change)="onRadioChange(ans.answer[i])"> {{ a.answer }} <br>
+      </div>
     </div>
-  </div>
+  <button class="btn btn-primary" (click)="submit()">Submit</button>
 </div>
-{{ answer | json}}
+{{ finalanswer | json}}
